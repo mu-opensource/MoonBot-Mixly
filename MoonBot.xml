@@ -1,0 +1,245 @@
+<!--type="company" 
+	block="block/moonbot.mixly.block.js" 
+	generator="generator/moonbot.mixly.generator.js"  
+	language="language/morpx_moonbot/"
+	lib="MoonBot/"
+	media="media/morpx_moonbot/"
+	pin="companypin/morpx_moonbot/"
+-->
+<script type="text/javascript" src="../../blocks/company/moonbot.mixly.block.js"></script>
+<script type="text/javascript" src="../../generators/arduino/company/moonbot.mixly.generator.js"></script>
+
+<category id="MoonBot" name="MoonBot" colour="#EF5411">
+	<category id="MoonBot_Input" name="输入" colour="#D31C32">
+		<block type="TouchSensorInit"></block>
+		<block type="IrSensorInit"></block>
+		<block type="ButtonPress"></block>
+		<block type="TouchSensorRead"></block>
+		<block type="IrSensorRead"></block>
+		<block type="PortToPin"></block>
+	</category>
+	<category id="MoonBot_TankBase" name="底盘控制" colour="#4BA354">
+		<block type="TankBaseInit">
+			<field name="LEFT_MOTOR_PORT">kMotor2</field>
+		</block>
+		<block type="TankBaseCalibrate">
+			<value name="PERCENT">
+				<shadow type="math_number">
+					<field name="NUM">100</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="TankBaseSetDistanceStep">
+			<value name="STEP">
+				<shadow type="math_number">
+					<field name="NUM">100</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="TankBaseSetAngleStep">
+			<value name="STEP">
+				<shadow type="math_number">
+					<field name="NUM">100</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="TankBaseForward">
+			<value name="STEP">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="SPEED_RPM">
+				<shadow type="math_number">
+					<field name="NUM">30</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="TankBaseBackward">
+			<value name="STEP">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="SPEED_RPM">
+				<shadow type="math_number">
+					<field name="NUM">30</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="TankBaseTurnLeft">
+			<value name="STEP">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="SPEED_RPM">
+				<shadow type="math_number">
+					<field name="NUM">30</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="TankBaseTurnRight">
+			<value name="STEP">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="SPEED_RPM">
+				<shadow type="math_number">
+					<field name="NUM">30</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="TankBaseStop"></block>
+		<block type="MotorWrite">
+			<value name="VOLTAGE">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="MotorRead"></block>
+		<block type="MotorWriteRpm">
+			<value name="RPM">
+				<shadow type="math_number">
+					<field name="NUM">30</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="TankBaseReadRpm"></block>
+	</category>
+	<category id="MoonBot_Servo" name="舵机" colour="#079B97">
+		<block type="ServoWrite">
+			<value name="ANGLE">
+				<shadow type="GetFieldAngle">
+					<field name="ANGLE">90</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="ServoRead"></block>
+		<block type="ServoSet">
+			<value name="ANGLE">
+				<shadow type="GetFieldAngle">
+					<field name="ANGLE">90</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="ServoMoveAll"></block>
+		<block type="ServoReverse"></block>
+		<block type="ServoCalibrate">
+			<value name="VAR">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+		</block>
+	</category>
+	<category id="MoonBot_Music" name="音乐" colour="#165299">
+		<block type="SpeakerInit"></block>
+		<block type="SpeakerPlayMode"></block>
+		<block type="SpeakerPlay"></block>
+		<block type="SpeakerSet"></block>
+		<block type="SpeakerSetVolume">
+			<value name="VOLUME">
+				<shadow type="math_number">
+					<field name="NUM">20</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="BuzzerPlayToneForBeat">
+			<field name="TONE">NOTE_C4</field>
+			<field name="BEAT">BEAT_FRACTION_WHOLE</field>
+		</block>
+		<block type="BuzzerPauseBeat"></block>
+		<block type="BuzzerSetTempo">
+			<value name="TEMPO">
+				<shadow type="math_number">
+					<field name="NUM">120</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="BuzzerRing">
+			<value name="FREQUENCY">
+				<shadow type="math_number">
+					<field name="NUM">100</field>
+				</shadow>
+			</value>
+			<value name="TIME">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="BuzzerStop"></block>
+	</category>
+	<category id="MoonBot_IMU" name="IMU" colour="#BC0C74">
+		<block type="IMUCompassCalibrate"></block>
+		<block type="IMUReadCompass"></block>
+		<block type="IMUReadAcceleration"></block>
+		<block type="IMUReadRotation"></block>
+		<block type="IMUReadTemperature"></block>
+		<block type="IMUOn"></block>
+	</category>
+	<category id="MoonBot_LED" name="灯光" colour="#909099">
+		<block type="EyesInit"></block>
+		<block type="EyesShowColor"></block>
+		<block type="EyesShowEmotion"></block>
+		<block type="ControllerLedShowColor"></block>
+		<block type="LedSetColor">
+			<value name="LED_NUM">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="R_VALUE">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="G_VALUE">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="B_VALUE">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="LedSetColorHSV">
+			<value name="LED_NUM">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="H_VALUE">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="S_VALUE">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+			<value name="V_VALUE">
+				<shadow type="math_number">
+					<field name="NUM">0</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="LedShow"></block>
+		<block type="LedClear"></block>
+		<block type="LedSetBrightness">
+			<value name="BRIGHTNESS">
+				<shadow type="math_number">
+					<field name="NUM">255</field>
+				</shadow>
+			</value>
+		</block>
+	</category>
+</category>
+
+
