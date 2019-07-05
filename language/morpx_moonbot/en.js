@@ -6,95 +6,122 @@ goog.provide('Blockly.Msg.en');
 
 goog.require('Blockly.Msg');
 
-/*LKL_(MODEL)_(FUNCTION)_(OPRATION)*/
-/*          Morpx Vision Sensor          */
-/*Help文本*/
-Blockly.LKL_VS2_HELP_INIT = '初始化视觉传感器，并选择相关的串口号';
-Blockly.LKL_VS2_HELP_SAVE = '保存视觉传感器的相关设置（只能在设置模式中使用）';
-Blockly.LKL_VS2_HELP_VISION_LEVEL = '设置识别等级，等级升高，误报率降低，识别率也会相应降低';
-Blockly.LKL_VS2_HELP_VISION_ZOOM = '设置图像缩放等级，等级升高，识别距离越远，识别角度越小';
-Blockly.LKL_VS2_HELP_WARNING_ONLY_USE_IN_CALLBACK_MODE = '警告！该函数只能在串口CALLBACK模式下使用！';
-
+/*          Morpx MoonBot          */
 /*参数文本*/
-//LED color type
-Blockly.LKL_VS2_LED_CLOSE = 'Close';					//'关闭';
-Blockly.LKL_VS2_LED_RED = 'Red';						//'红色';
-Blockly.LKL_VS2_LED_GREEN = 'Green';					//'绿色';
-Blockly.LKL_VS2_LED_YELLOW = 'Yellow';					//'黄色';
-Blockly.LKL_VS2_LED_BLUE = 'Blue';						//'蓝色';
-Blockly.LKL_VS2_LED_PURPLE = 'Purple';					//'紫色';
-Blockly.LKL_VS2_LED_CYAN = 'Cyan';						//'青色';
-Blockly.LKL_VS2_LED_WHITE = 'White';					//'白色';
-//Vision Zoom
-Blockly.LKL_VS2_AUTO = 'auto';							//'自动';
-Blockly.LKL_VS2_VISION_ZOOM = 'Zoom';					//'缩放';
-//Vision Level
-Blockly.LKL_VS2_LEVEL = 'level';						//'等级';
-Blockly.LKL_VS2_HIGH_SPEED = 'highSpeed';				//'速度优先';
-Blockly.LKL_VS2_NORMAL = 'normal';						//'性能均衡';
-Blockly.LKL_VS2_HIGH_ACCURACY = 'highAccuracy';			//'准确度优先';
-//UART status
-Blockly.LKL_VS2_UART_OPEN = 'Open';						//'打开';
-Blockly.LKL_VS2_UART_CLOSE = 'Close';					//'关闭';
-//Vision type
-Blockly.LKL_VS2_VISION_BALL = 'Ball';					//'球';
-Blockly.LKL_VS2_VISION_LINE = 'Line';					//'线条';
-Blockly.LKL_VS2_VISION_BODY = 'Body';					//'人体';
-Blockly.LKL_VS2_VISION_FACE = 'Face';					//'人脸';
-Blockly.LKL_VS2_VISION_TRAFFIC_CARD = 'TrafficCard';	//'交通卡片';
-Blockly.LKL_VS2_VISION_SHAPE_CARD = 'ShapeCard';		//'形状卡片';
-//Card type
-Blockly.LKL_VS2_CARD_CIRCLE = 'Circle';					//'圆形';
-Blockly.LKL_VS2_CARD_TRIANGLE = 'Triangle';				//'三角形';
-Blockly.LKL_VS2_CARD_SQUARE = 'Square';					//'方形';
-Blockly.LKL_VS2_CARD_TRUE = 'True';						//'正确';
-Blockly.LKL_VS2_CARD_FALSE = 'False';					//'错误';
-Blockly.LKL_VS2_CARD_STRAIGHT = 'Straight';				//'向前';
-Blockly.LKL_VS2_CARD_TURN_LEFT = 'TurnLeft';			//'向左';
-Blockly.LKL_VS2_CARD_TURN_RIGHT = 'TurnRight';			//'向右';
-Blockly.LKL_VS2_CARD_TURN_AROUND = 'TurnAround';		//'掉头';
-Blockly.LKL_VS2_CARD_WHISTLE = 'Whistle';				//'鸣笛';
-Blockly.LKL_VS2_CARD_STOP = 'Stop';						//'停止';
-//Vision state
-Blockly.LKL_VS2_STATE_VALUE_X = 'Horizontal';			//'横向坐标';
-Blockly.LKL_VS2_STATE_VALUE_Y = 'Vertical';				//'纵向坐标';
-Blockly.LKL_VS2_STATE_VALUE_WIDTH = 'Width';			//'宽度';
-Blockly.LKL_VS2_STATE_VALUE_HEIGHT = 'Height';			//'高度';
-Blockly.LKL_VS2_STATE_VALUE_R_CHANNEL = 'ChannelR';		//'红色通道';
-Blockly.LKL_VS2_STATE_VALUE_G_CHANNEL = 'ChannelG';		//'绿色通道';
-Blockly.LKL_VS2_STATE_VALUE_B_CHANNEL = 'ChannelB';		//'蓝色通道';
-Blockly.LKL_VS2_STATE_VALUE_CARD_TYPE = 'Type';			//'类型';
-//True False
-Blockly.LKL_VS2_TRUE = 'True';							//'是';
-Blockly.LKL_VS2_FALSE = 'False';						//'否';
-//Enable Disable
-Blockly.LKL_VS2_ENABLE = 'enable';						//'开启';
-Blockly.LKL_VS2_DISABLE = 'disable';					//'关闭';
+Blockly.Msg.MOONBOT_PORT = 'port';                              //'端口';
+Blockly.Msg.MOONBOT_PIN = 'pin';                                //'引脚';
+Blockly.Msg.MOONBOT_SERVO = 'servo';                            //'舵机';
+Blockly.Msg.MOONBOT_MOTOR = 'motor';                            //'电机';
+Blockly.Msg.MOONBOT_WHEEL = 'wheel';                            //'轮';
+Blockly.Msg.MOONBOT_TANK_BASE = 'tank base';                    //'底盘控制';
+Blockly.Msg.MOONBOT_SPEAKER = 'speaker';                        //'扬声器';
+Blockly.Msg.MOONBOT_BUZZER = 'buzzer';                          //'蜂鸣器';
+Blockly.Msg.MOONBOT_TOUCH = 'touch sensor';                     //'触摸传感器';
+Blockly.Msg.MOONBOT_IR = 'IR';                                  //'红外传感器';
+Blockly.Msg.MOONBOT_BUTTON = 'button';                          //'按键';
+Blockly.Msg.MOONBOT_EYE = 'eyes';                               //'眼睛';
+Blockly.Msg.MOONBOT_CONTROLLER_LED = 'controller LED';          //'主控LED';
+Blockly.Msg.MOONBOT_COMPASS = 'compass';                        //'指南针';
+Blockly.Msg.MOONBOT_ACCELERATION = 'acceleration';              //'加速度传感器';
+Blockly.Msg.MOONBOT_TEMPERATRUE = 'temperation';                //'温度';
+Blockly.Msg.MOONBOT_AXES = 'axes';                              //'轴';
+Blockly.Msg.MOONBOT_ROLL = 'roll';                              //'横滚角';
+Blockly.Msg.MOONBOT_PITCH = 'pitch';                            //'俯仰角';
+Blockly.Msg.MOONBOT_READ = 'read ';                              //'读取';
+Blockly.Msg.MOONBOT_WRITE = 'write ';                            //'写入';
+Blockly.Msg.MOONBOT_SET = 'set ';                                //'设置';
+Blockly.Msg.MOONBOT_PRESET = 'preset ';                          //'预设';
+Blockly.Msg.MOONBOT_MODE = 'mode';                              //'模式';
+Blockly.Msg.MOONBOT_LEFT = 'left';                              //'左';
+Blockly.Msg.MOONBOT_RIGHT = 'right';                            //'右';
+Blockly.Msg.MOONBOT_FORWARD = 'forward';                        //'前进';
+Blockly.Msg.MOONBOT_BACKWARD = 'backward';                      //'后退';
+Blockly.Msg.MOONBOT_TURN_LEFT = 'turn left';                    //'左转';
+Blockly.Msg.MOONBOT_TURN_RIGHT = 'turn right';                  //'右转';
+Blockly.Msg.MOONBOT_STOP = 'stop';                              //'停止';
+Blockly.Msg.MOONBOT_VOLTAGE = 'voltage';                        //'电压';
+Blockly.Msg.MOONBOT_ANGLE = 'angle';                            //'角度';
+Blockly.Msg.MOONBOT_DISTANCE = 'distance';                      //'距离';
+Blockly.Msg.MOONBOT_OFFSET = 'offset';                          //'偏移';
+Blockly.Msg.MOONBOT_RPM = 'RPM';                                //'转速';
+Blockly.Msg.MOONBOT_BRIGHTNESS = 'brightness';                  //'亮度';
+Blockly.Msg.MOONBOT_FREQUENCY = 'frequency';                    //'频率';
+Blockly.Msg.MOONBOT_TIME = 'time';                              //'时间';
+Blockly.Msg.MOONBOT_STEP = 'step';                              //'步';
+Blockly.Msg.MOONBOT_SPEED = 'speed';                            //'速度';
+Blockly.Msg.MOONBOT_VALUE = 'value';                            //'值';
+Blockly.Msg.MOONBOT_STRENGTH = 'strength';                      //'强度';
+Blockly.Msg.MOONBOT_CALIBRATE = ' calibrate';                    //'校正';
+Blockly.Msg.MOONBOT_SHOW = 'show';                              //'显示';
+Blockly.Msg.MOONBOT_CLEAR = 'clear';                            //'清除';
+Blockly.Msg.MOONBOT_PLAY = 'play';                              //'播放';
+Blockly.Msg.MOONBOT_PAUSE = 'pause';                            //'暂停';
+Blockly.Msg.MOONBOT_PLAY_NEXT = 'paly next';                    //'下一首';
+Blockly.Msg.MOONBOT_PLAY_LAST = 'play last';                    //'上一首';
+Blockly.Msg.MOONBOT_VOLUME = 'volume';                          //'音量';
+Blockly.Msg.MOONBOT_PRESSED = 'pressed';                        //'被按下';
+Blockly.Msg.MOONBOT_STRAIGHT_STEP = 'straight ';                 //'直行';
+Blockly.Msg.MOONBOT_ANGLE_STEP = 'turning ';                       //'转弯';
+Blockly.Msg.MOONBOT_REVERSE_DIRECTION = 'reverse direction';    //'翻转方向';
 
-//Other
-Blockly.LKL_VS2_COLOR = 'Color';						//'颜色';
+Blockly.Msg.MOONBOT_INIT_ON = 'init on';                        //'连接至';
 
-/*模块文本*/
-Blockly.LKL_VS2_MU = 'initialize';									//'初始化';
-Blockly.LKL_VS2_MODE = 'mode';										//'模式';
-Blockly.LKL_VS2_SetupVS = 'setupVisionSensor';						//'设置';
-Blockly.LKL_VS2_SERIAL = 'port';									//'串口号';
-Blockly.LKL_VS2_ADDRESS = 'address';								//'地址';
-Blockly.LKL_VS2_RESET = 'setDefault';								//'恢复到出厂设置';
-Blockly.LKL_VS2_SAVE = 'saveSettings';								//'保存设置';
-Blockly.LKL_VS2_LED_DETECT_COLOR = 'detectedColor';					//'识别到物体亮';
-Blockly.LKL_VS2_LED_UNDETECT_COLOR = 'undetectedColor';				//'没识别到物体亮';
-Blockly.LKL_VS2_SET_VISION_TYPE = 'setVisionType';					//'开启算法';
-Blockly.LKL_VS2_SET_VISION = 'setVision';							//'设置算法';
-Blockly.LKL_VS2_SET_VISION_LEVEL = 'setVisionLevel';				//'设置识别等级';
-Blockly.LKL_VS2_SET_FRAME_ROTATE = 'rotateFrame';					//'图像翻转';
-Blockly.LKL_VS2_SET_VISION_ZOOM = 'setVisionZoom';					//'设置图像缩放等级';
-Blockly.LKL_VS2_SET_UART_STATUS = 'setUARTStatus';					//'设置串口状态';
-Blockly.LKL_VS2_SET_UART_OUTPUT_TYPE = 'setUARTOutputType';			//'设置串口输出模式';
-Blockly.LKL_VS2_SET_UART_BAUD = 'setUARTBaudrate';					//'设置串口波特率';
-// Blockly.LKL_VS2_SEARCH = 'search';									//'搜索目标';
-Blockly.LKL_VS2_DETECTED = 'detect';								//'检测到';
-Blockly.LKL_VS2_GET_DETECTED_MESSAGE = 'get';						//'获取';
-Blockly.LKL_VS2_VALUE = 'value';									//'值';
-Blockly.LKL_VS2_GET_PIX_COLOR = 'getPosition';						//'捕获坐标';
+Blockly.Msg.MOONBOT_LED_NUMBER = 'light number';                //'灯号';
+Blockly.Msg.MOONBOT_MOVE_ALL_SERVO = 'move all servo to preset angle';//'同步移动所有舵机至预设角度';
+Blockly.Msg.MOONBOT_ENABLE = 'enable';                          //'使能';
+Blockly.Msg.MOONBOT_DISENABLE = 'disable';                      //'失能';
+Blockly.Msg.MOONBOT_ENCODER = 'encoder';                        //'编码器';
 
+/*   Parameter  */
+// speaker play mode
+Blockly.Msg.MOONBOT_SPEAKER_SINGLE = 'single';                  //'单曲';
+Blockly.Msg.MOONBOT_REPEAT = 'repeat';                          //'循环';
+Blockly.Msg.MOONBOT_RANDOM = 'random';                          //'随机';
+// music middle
+Blockly.Msg.MOONBOT_TEMPO = 'tempo';                            //'节拍';
+Blockly.Msg.MOONBOT_TONE = 'tone';                              //'音调';
+Blockly.Msg.MOONBOT_LOW = 'low ';                                //'低';
+Blockly.Msg.MOONBOT_MIDDLE = 'middle ';                          //'中';
+Blockly.Msg.MOONBOT_HIGH = 'high ';                              //'高';
+Blockly.Msg.MOONBOT_BEAT = 'beat';                              //'拍';
+// music name
+Blockly.Msg.MOONBOT_ELEPHANT = 'elephant';                      //'大象';
+Blockly.Msg.MOONBOT_COCK = 'cock';                              //'鸡';
+Blockly.Msg.MOONBOT_DOG = 'dog';                                //'狗';
+Blockly.Msg.MOONBOT_WOLF = 'wolf';                              //'狼';
+Blockly.Msg.MOONBOT_HORSE = 'horse';                            //'马';
+Blockly.Msg.MOONBOT_CAT = 'cat';                                //'猫';
+Blockly.Msg.MOONBOT_LION = 'lion';                              //'狮子';
+Blockly.Msg.MOONBOT_COW = 'cow';                                //'牛';
+Blockly.Msg.MOONBOT_BEAR = 'bear';                              //'熊';
+Blockly.Msg.MOONBOT_DUCK = 'duck';                              //'鸭子';
+Blockly.Msg.MOONBOT_SHEEP = 'sheep';                            //'羊';
+Blockly.Msg.MOONBOT_PIG = 'pig';                                //'猪';
+Blockly.Msg.MOONBOT_MOSQUITO = 'mosquito';                      //'蚊子';
+Blockly.Msg.MOONBOT_BIRD = 'bird';                              //'鸟';
+Blockly.Msg.MOONBOT_PENGUIN = 'penguin';                        //'企鹅';
+Blockly.Msg.MOONBOT_PIANO = 'piano';                            //'钢琴';
+Blockly.Msg.MOONBOT_BUS = 'bus';                                //'巴士';
+Blockly.Msg.MOONBOT_TELL = 'phone';                             //'电话';
+Blockly.Msg.MOONBOT_MOTORCYCLE = 'motorcycle';                  //'摩托车';
+Blockly.Msg.MOONBOT_CAR = 'car';                                //'汽车';
+Blockly.Msg.MOONBOT_DRUM = 'drum';                              //'鼓';
+// servo
+Blockly.Msg.MOONBOT_FAST = 'fast';                              //'快';
+Blockly.Msg.MOONBOT_SLOW = 'slow';                              //'慢';
+
+// IMU state
+Blockly.Msg.MOONBOT_SHAKE = 'shake';                            //'震动';
+Blockly.Msg.MOONBOT_FREE_FALL = 'free fall';                    //'自由落体';
+Blockly.Msg.MOONBOT_ON = 'on';                                  //'在';
+
+/*Help文本*/
+Blockly.Msg.MOONBOT_TIP_RPM_CALIBRATE = 'tank base straight line offset correction, >100% right correction, <100% left correction';//'底盘直行偏移校正，>100%向右校正，<100%向左校正';
+Blockly.Msg.MOONBOT_TIP_DISTANCE_CALIBRATE = 'tank base straight line distance correction, >100% forward correction, <100% backward correction';//'底盘直行距离校正，>100%向前校正，<100%向后校正';
+Blockly.Msg.MOONBOT_TIP_ANGLE_CALIBRATE = 'tank base turning angle correction, >100% turning angle increases, <100% turning angle decreases';//'底盘转弯角度校正，>100%转弯角度增大，<100%转弯角度减小';
+Blockly.Msg.MOONBOT_TIP_PORT2PIN = 'get the pin number of the port';//'获取端口对应引脚号';
+Blockly.Msg.MOONBOT_TIP_TANKBASE_INIT = 'flip the direction of rotation of the wheel';//'翻转轮子转动方向';
+Blockly.Msg.MOONBOT_TIP_SERVO_SET = 'Preset servo angle and running speed, used with block ['+Blockly.Msg.MOONBOT_MOVE_ALL_SERVO+']';//'预设舵机角度及运行速度，与模块['+Blockly.Msg.MOONBOT_MOVE_ALL_SERVO+']搭配使用';
+Blockly.Msg.MOONBOT_TIP_MOVE_ALL_SERVO = 'move all servo to preset angle, used with block ['+Blockly.Msg.MOONBOT_SERVO+Blockly.Msg.MOONBOT_PRESET+Blockly.Msg.MOONBOT_ANGLE+']';
+Blockly.Msg.MOONBOT_TIP_SERVO_REVERSE = 'flip servo running direction';//'翻转舵机运行方向';
+Blockly.Msg.MOONBOT_TIP_SPEAKER_PALY_NAME = 'Play music, just enter the first 4 words of the music name, multiple input is invalid';            //'播放音乐，音乐名称只要输入前4个字即可，多输入无效';

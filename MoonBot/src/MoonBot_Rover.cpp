@@ -19,12 +19,15 @@ MoonBotRover::~MoonBotRover(void) {
 }
 
 int MoonBotRover::begin(void) {
-//  head_.write(100);
-  Mu_.VisionBegin(VISION_TRAFFIC_CARD_DETECT);
-  Mu_.VisionBegin(VISION_NUM_CARD_DETECT);
-  Mu_.VisionSetLevel(VISION_TRAFFIC_CARD_DETECT, kLevelAccuracy);
-  Mu_.VisionSetLevel(VISION_NUM_CARD_DETECT, kLevelAccuracy);
-  return 0;
+  mu_err_t err;
+  err = Mu_.VisionBegin(VISION_TRAFFIC_CARD_DETECT);
+  if (err) return err;
+  err = Mu_.VisionBegin(VISION_NUM_CARD_DETECT);
+  if (err) return err;
+  err = Mu_.VisionSetLevel(VISION_TRAFFIC_CARD_DETECT, kLevelAccuracy);
+  if (err) return err;
+  err = Mu_.VisionSetLevel(VISION_NUM_CARD_DETECT, kLevelAccuracy);
+  return err;
 }
 
 void MoonBotRover::end(void) {
@@ -134,4 +137,37 @@ void MoonBotRover::runTrafficNumber(void) {
     }
   }
 }
+
+int MoonBotRover::followBallBegin(void) {
+  return Mu_.VisionBegin(VISION_BALL_DETECT);
+}
+
+void MoonBotRover::followBallEnd(void) {
+  Mu_.VisionEnd(VISION_BALL_DETECT);
+}
+
+void MoonBotRover::runFollowBall(void) {
+  if (Mu_.UpdateResult(VISION_BALL_DETECT, false) | VISION_BALL_DETECT) {
+    MuVsVisionState* vision_state = Mu_.GetVisionState(VISION_BALL_DETECT);
+    if (vision_state->detect) {
+      ball_x_ = vision_state->vision_result[0].bot_x_value;
+      if (ball_x_ < ball_center_x_-13) {
+        TankBase.write(-ball_search_rpm_, ball_search_rpm_);
+      } else if (ball_x_ > ball_center_x_ + 13) {
+        TankBase.write(ball_search_rpm_, -ball_search_rpm_);
+      } else {
+        TankBase.write(ball_search_rpm_, ball_search_rpm_);
+      }
+    } else {
+      if (ball_x_ > ball_center_x_) {
+        TankBase.write(ball_search_rpm_, -ball_search_rpm_);
+      } else {
+        TankBase.write(-ball_search_rpm_, ball_search_rpm_);
+      }
+    }
+  }
+}
+
+
+
 

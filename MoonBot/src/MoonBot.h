@@ -28,6 +28,7 @@
 #include "MoonBot_Eyes.h"
 #include "MoonBot_MECH.h"
 #include "MoonBot_Rover.h"
+#include "MoonBot_Humannoid.h"
 
 // The following two diagrams show how the sensors, servos and motors should
 // be connected to the main controller of the MoonBot.

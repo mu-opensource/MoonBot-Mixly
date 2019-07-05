@@ -162,6 +162,14 @@ void MoonBotMECH::UpdateResult(MuVisionType vision_type) {
   }
 }
 
+void MoonBotMECH::SetZoom(MuVsCameraZoom zoom) {
+  if (zoom_now_ != zoom) {
+    zoom_now_ = zoom;
+    zoom_count_ = 0;
+    Mu_->CameraSetZoom(zoom_now_);
+  }
+}
+
 bool MoonBotMECH::searchBall(void) {
   claw_.setTargetAngle(claw_open_);
   if (is_time2search_ball_.isExpired()) {
@@ -186,6 +194,26 @@ bool MoonBotMECH::searchBall(void) {
         break;
     }
   }
+  // set different zoom
+//  zoom_count_++;
+//  int upper_arm_angle = upper_arm_.read();
+//  if (zoom_count_%5 == 4) {
+//    if (upper_arm_angle >= upper_arm_init_+10) {
+//      if (zoom_now_ == kZoom4) {
+//        SetZoom(kZoom2);
+//      } else {
+//        SetZoom(MuVsCameraZoom(zoom_now_+1));
+//      }
+//    } if (upper_arm_angle >= upper_arm_init_+5) {
+//      if (zoom_now_ == kZoom3) {
+//        SetZoom(kZoom1);
+//      } else {
+//        SetZoom(MuVsCameraZoom(zoom_now_+1));
+//      }
+//    } else {
+//      SetZoom(kZoom1);
+//    }
+//  }
   SetVision(VISION_BALL_DETECT);
   UpdateResult(VISION_BALL_DETECT);
   if (Mu_->read(VISION_BALL_DETECT, kStatus)) {
@@ -345,26 +373,26 @@ moonbot_mech_shoot_ball_t MoonBotMECH::shootBall(void) {
     lower_arm_.setTargetAngle(lower_arm_grabbed_, 2);
     upper_arm_.setTargetAngle(upper_arm_grabbed_, 2);
     MoonBotServo::moveAllServoToTarget();
-    TankBase.write(-150, -150);
+    TankBase.write(-120, -120);
     delay(2000);
     TankBase.write(0, 0);
     upper_arm_.setTargetAngle(upper_arm_init_, 2);
     lower_arm_.setTargetAngle(lower_arm_init_, 2);
     MoonBotServo::moveAllServoToTarget();
-    switch (random(2)) {
-      case 0:
-        TankBase.write(-150, 150);
-        delay(2000);
-        TankBase.write(0, 0);
-        break;
-      case 1:
-        TankBase.write(150, -150);
-        delay(2000);
-        TankBase.write(0, 0);
-        break;
-      default:
-        break;
-    }
+//    switch (random(2)) {            // remove action: turn around in 19.06.21
+//      case 0:
+//        TankBase.write(-150, 150);
+//        delay(2000);
+//        TankBase.write(0, 0);
+//        break;
+//      case 1:
+//        TankBase.write(150, -150);
+//        delay(2000);
+//        TankBase.write(0, 0);
+//        break;
+//      default:
+//        break;
+//    }
     return kShootedBall;
   }
 

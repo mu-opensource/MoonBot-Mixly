@@ -11,6 +11,7 @@ Blockly.Blocks.MoonBot.HUE_Servo = "#079B97";
 Blockly.Blocks.MoonBot.HUE_Music = "#165299";
 Blockly.Blocks.MoonBot.HUE_IMU = "#BC0C74";
 Blockly.Blocks.MoonBot.HUE_LED = "#909099";
+Blockly.Blocks.MoonBot.HUE_MECH = "74";
 
 /**************TankBase***************/
 Blockly.Blocks['TankBaseInit'] = {
@@ -334,7 +335,51 @@ Blockly.Blocks['SpeakerPlayMode'] = {
 };
 Blockly.Blocks['SpeakerPlay'] = {
   init:function() {
-    var dropdown_music = [["little_star", "1010"]];
+    var dropdown_music = [
+      [Blockly.Msg.MOONBOT_ELEPHANT, "0101"],
+      [Blockly.Msg.MOONBOT_COCK, "0102"],
+      [Blockly.Msg.MOONBOT_DOG, "0103"],
+      [Blockly.Msg.MOONBOT_WOLF, "0104"],
+      [Blockly.Msg.MOONBOT_HORSE, "0105"],
+      [Blockly.Msg.MOONBOT_CAT, "0106"],
+      [Blockly.Msg.MOONBOT_LION, "0107"],
+      [Blockly.Msg.MOONBOT_COW, "0108"],
+      [Blockly.Msg.MOONBOT_BEAR, "0109"],
+      [Blockly.Msg.MOONBOT_DUCK, "0110"],
+      [Blockly.Msg.MOONBOT_SHEEP, "0111"],
+      [Blockly.Msg.MOONBOT_PIG, "0112"],
+      [Blockly.Msg.MOONBOT_MOSQUITO, "01014"],
+      [Blockly.Msg.MOONBOT_BIRD, "0114"],
+      [Blockly.Msg.MOONBOT_PENGUIN, "0115"],
+      ["hello", "0201"],
+      ["hi", "0202"],
+      ["how are you", "0203"],
+      ["nice to meet you", "0204"],
+      ["thank you", "0205"],
+      ["what are you doing?", "0206"],
+      [Blockly.Msg.MOONBOT_PIANO+" do 1", "0301"],
+      [Blockly.Msg.MOONBOT_PIANO+" re 2", "0302"],
+      [Blockly.Msg.MOONBOT_PIANO+" mi 3", "0303"],
+      [Blockly.Msg.MOONBOT_PIANO+" fa 4", "0304"],
+      [Blockly.Msg.MOONBOT_PIANO+" sol 5", "0305"],
+      [Blockly.Msg.MOONBOT_PIANO+" la 6", "0306"],
+      [Blockly.Msg.MOONBOT_PIANO+" si 7", "0307"],
+      [Blockly.Msg.MOONBOT_PIANO+" Do. 1.", "0308"],
+      ["110", "0401"],
+      ["120", "0402"],
+      ["119", "0403"],
+      [Blockly.Msg.MOONBOT_BUS, "0404"],
+      [Blockly.Msg.MOONBOT_TELL, "0405"],
+      [Blockly.Msg.MOONBOT_MOTORCYCLE, "0406"],
+      [Blockly.Msg.MOONBOT_CAR, "0407"],
+      [Blockly.Msg.MOONBOT_PIANO, "0408"],
+      [Blockly.Msg.MOONBOT_DRUM+" 1", "0501"],
+      [Blockly.Msg.MOONBOT_DRUM+" 2", "0502"],
+      [Blockly.Msg.MOONBOT_DRUM+" 3", "0503"],
+      [Blockly.Msg.MOONBOT_DRUM+" 4", "0504"],
+      [Blockly.Msg.MOONBOT_DRUM+" 5", "0505"],
+      [Blockly.Msg.MOONBOT_DRUM+" 6", "0506"],
+    ];
     this.setColour(Blockly.Blocks.MoonBot.HUE_Music);
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage(Blockly.Blocks.MoonBot.media_path_base+"speaker.png", 30, 30))
@@ -346,12 +391,46 @@ Blockly.Blocks['SpeakerPlay'] = {
     this.setNextStatement(true, null);
   },
 };
+Blockly.Blocks['SpeakerPlayName'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_Music);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(Blockly.Blocks.MoonBot.media_path_base+"speaker.png", 30, 30))
+        .appendField(Blockly.Msg.MOONBOT_SPEAKER)
+        .appendField(Blockly.Msg.MOONBOT_PLAY)
+        .appendField(this.newQuote_(true))
+        .appendField(new Blockly.FieldTextInput('',Blockly.FieldTextInput.char_validator), "NAME1")
+        .appendField(new Blockly.FieldTextInput('',Blockly.FieldTextInput.char_validator), "NAME2")
+        .appendField(new Blockly.FieldTextInput('',Blockly.FieldTextInput.char_validator), "NAME3")
+        .appendField(new Blockly.FieldTextInput('',Blockly.FieldTextInput.char_validator), "NAME4")
+        .appendField(this.newQuote_(false));
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.MOONBOT_TIP_SPEAKER_PALY_NAME);
+  },
+  /**
+   * Create an image of an open or closed quote.
+   * @param {boolean} open True if open quote, false if closed.
+   * @return {!Blockly.FieldImage} The field image of the quote.
+   * @private
+   */
+  newQuote_: function(open) {
+    if (open == this.RTL) {
+      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAqUlEQVQI1z3KvUpCcRiA8ef9E4JNHhI0aFEacm1o0BsI0Slx8wa8gLauoDnoBhq7DcfWhggONDmJJgqCPA7neJ7p934EOOKOnM8Q7PDElo/4x4lFb2DmuUjcUzS3URnGib9qaPNbuXvBO3sGPHJDRG6fGVdMSeWDP2q99FQdFrz26Gu5Tq7dFMzUvbXy8KXeAj57cOklgA+u1B5AoslLtGIHQMaCVnwDnADZIFIrXsoXrgAAAABJRU5ErkJggg==';
+    } else {
+      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAn0lEQVQI1z3OMa5BURSF4f/cQhAKjUQhuQmFNwGJEUi0RKN5rU7FHKhpjEH3TEMtkdBSCY1EIv8r7nFX9e29V7EBAOvu7RPjwmWGH/VuF8CyN9/OAdvqIXYLvtRaNjx9mMTDyo+NjAN1HNcl9ZQ5oQMM3dgDUqDo1l8DzvwmtZN7mnD+PkmLa+4mhrxVA9fRowBWmVBhFy5gYEjKMfz9AylsaRRgGzvZAAAAAElFTkSuQmCC';
+    }
+    return new Blockly.FieldImage(file, 12, 12, '"');
+  }
+};
 Blockly.Blocks['SpeakerSet'] = {
   init:function() {
-    var dropdown_mode = [["⏯ "+Blockly.Msg.MOONBOT_PLAY+"/"+Blockly.Msg.MOONBOT_PAUSE, "pause"],
-                        ["⏭ "+Blockly.Msg.MOONBOT_PLAY_NEXT,"playNext"],
-                        ["⏮ "+Blockly.Msg.MOONBOT_PLAY_LAST,"playPrevious"],
-                        ["⏹ "+Blockly.Msg.MOONBOT_STOP,"stop"]
+    var dropdown_mode = [
+      ["⏯ "+Blockly.Msg.MOONBOT_PLAY+"/"+Blockly.Msg.MOONBOT_PAUSE, "pause"],
+      ["⏭ "+Blockly.Msg.MOONBOT_PLAY_NEXT,"playNext"],
+      ["⏮ "+Blockly.Msg.MOONBOT_PLAY_LAST,"playPrevious"],
+      ["⏹ "+Blockly.Msg.MOONBOT_STOP,"stop"],
     ];
     this.setColour(Blockly.Blocks.MoonBot.HUE_Music);
     this.appendDummyInput()
@@ -401,14 +480,14 @@ var dropdown_tone = [
   [Blockly.Msg.MOONBOT_HIGH+'A', 'NOTE_A5'],
   [Blockly.Msg.MOONBOT_HIGH+'B', 'NOTE_B5']];
 var dropdown_beat = [
-  ['1/16'+Blockly.Msg.MOONBOT_BEAT, 'BEAT_FRACTION_SIXTEENTH'],
-  ['1/8'+Blockly.Msg.MOONBOT_BEAT, 'BEAT_FRACTION_EIGHTH'],
-  ['1/4'+Blockly.Msg.MOONBOT_BEAT, 'BEAT_FRACTION_QUARTER'],
-  ['1/2'+Blockly.Msg.MOONBOT_BEAT, 'BEAT_FRACTION_HALF'],
-  ['3/4'+Blockly.Msg.MOONBOT_BEAT, 'BEAT_FRACTION_THREE_QUARTER'],
-  ['1'+Blockly.Msg.MOONBOT_BEAT, 'BEAT_FRACTION_WHOLE'],
-  ['2'+Blockly.Msg.MOONBOT_BEAT, 'BEAT_FRACTION_DOUBLE'],
-  ['4'+Blockly.Msg.MOONBOT_BEAT, 'BEAT_FRACTION_BREVE']];
+  ['1/16', 'BEAT_FRACTION_SIXTEENTH'],
+  ['1/8', 'BEAT_FRACTION_EIGHTH'],
+  ['1/4', 'BEAT_FRACTION_QUARTER'],
+  ['1/2', 'BEAT_FRACTION_HALF'],
+  ['3/4', 'BEAT_FRACTION_THREE_QUARTER'],
+  ['1', 'BEAT_FRACTION_WHOLE'],
+  ['2', 'BEAT_FRACTION_DOUBLE'],
+  ['4', 'BEAT_FRACTION_BREVE']];
 Blockly.Blocks['BuzzerPlayToneForBeat'] = {
   init:function() {
     this.setColour(Blockly.Blocks.MoonBot.HUE_Music);
@@ -416,7 +495,8 @@ Blockly.Blocks['BuzzerPlayToneForBeat'] = {
         .appendField(Blockly.Msg.MOONBOT_BUZZER)
         .appendField(Blockly.Msg.MOONBOT_PLAY)
         .appendField(new Blockly.FieldDropdown(dropdown_tone), "TONE")
-        .appendField(new Blockly.FieldDropdown(dropdown_beat), "BEAT");
+        .appendField(new Blockly.FieldDropdown(dropdown_beat), "BEAT")
+        .appendField(Blockly.Msg.MOONBOT_BEAT);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -428,7 +508,8 @@ Blockly.Blocks['BuzzerPauseBeat'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.MOONBOT_BUZZER)
         .appendField(Blockly.Msg.MOONBOT_PAUSE)
-        .appendField(new Blockly.FieldDropdown(dropdown_beat), "BEAT");
+        .appendField(new Blockly.FieldDropdown(dropdown_beat), "BEAT")
+        .appendField(Blockly.Msg.MOONBOT_BEAT);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -507,8 +588,7 @@ Blockly.Blocks['TouchSensorRead'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage(Blockly.Blocks.MoonBot.media_path_base+"touch.png", 30, 30))
         .appendField(Blockly.Msg.MOONBOT_TOUCH)
-        .appendField(Blockly.Msg.MOONBOT_READ)
-        .appendField(Blockly.Msg.MOONBOT_PORT)
+        .appendField(Blockly.Msg.MOONBOT_READ+Blockly.Msg.MOONBOT_PORT)
         .appendField(new Blockly.FieldDropdown(profile.moonbot.group_port), "PORT");
     this.setOutput(true, Boolean);
   },
@@ -563,7 +643,8 @@ Blockly.Blocks['IMUReadCompass'] = {
   init:function() {
     this.setColour(Blockly.Blocks.MoonBot.HUE_IMU);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.MOONBOT_COMPASS+Blockly.Msg.MOONBOT_ANGLE+"(0~360°)");
+        .appendField(Blockly.Msg.MOONBOT_COMPASS)
+        .appendField(Blockly.Msg.MOONBOT_ANGLE+"(0~360°)");
     this.setOutput(true, Number);
   },
 };
@@ -593,9 +674,11 @@ Blockly.Blocks['IMUReadRotation'] = {
 };
 Blockly.Blocks['IMUReadTemperature'] = {
   init:function() {
+    var dropdown_temperature = [["℃","C"], ["℉","F"]];
     this.setColour(Blockly.Blocks.MoonBot.HUE_IMU);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.MOONBOT_TEMPERATRUE);
+        .appendField(Blockly.Msg.MOONBOT_TEMPERATRUE)
+        .appendField(new Blockly.FieldDropdown(dropdown_temperature), "TEMPERATURE");
     this.setOutput(true, Number);
   },
 };
@@ -618,7 +701,8 @@ Blockly.Blocks['EyesInit'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage(Blockly.Blocks.MoonBot.media_path_base+"eyes.png", 30, 30))
         .appendField(Blockly.Msg.MOONBOT_EYE)
-        .appendField(Blockly.Msg.MOONBOT_INIT_ON+Blockly.Msg.MOONBOT_PORT)
+        .appendField(Blockly.Msg.MOONBOT_INIT_ON)
+        .appendField(Blockly.Msg.MOONBOT_PORT)
         .appendField(new Blockly.FieldDropdown(profile.moonbot.group_port), "PORT");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -634,7 +718,8 @@ Blockly.Blocks['ControllerLedShowColor'] = {
       eyes_color[i].setColours(led_color).setColumns(3);
     }
     this.appendDummyInput()
-        .appendField(Blockly.Msg.MOONBOT_CONTROLLER_LED+Blockly.Msg.MOONBOT_SHOW)
+        .appendField(Blockly.Msg.MOONBOT_CONTROLLER_LED)
+        .appendField(Blockly.Msg.MOONBOT_SHOW)
         .appendField(eyes_color[0], "LED0")
         .appendField(eyes_color[1], "LED1");
 
@@ -653,7 +738,8 @@ Blockly.Blocks['EyesShowColor'] = {
     }
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage(Blockly.Blocks.MoonBot.media_path_base+"eyes.png", 30, 30))
-        .appendField(Blockly.Msg.MOONBOT_EYE+Blockly.Msg.MOONBOT_SHOW);
+        .appendField(Blockly.Msg.MOONBOT_EYE)
+        .appendField(Blockly.Msg.MOONBOT_SHOW);
 
     this.appendDummyInput()
         .appendField("\t\t\t")
@@ -691,7 +777,8 @@ Blockly.Blocks['EyesShowEmotion'] = {
     this.setColour(Blockly.Blocks.MoonBot.HUE_LED);
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage(Blockly.Blocks.MoonBot.media_path_base+"eyes.png", 30, 30))
-        .appendField(Blockly.Msg.MOONBOT_EYE+Blockly.Msg.MOONBOT_SHOW)
+        .appendField(Blockly.Msg.MOONBOT_EYE)
+        .appendField(Blockly.Msg.MOONBOT_SHOW)
         .appendField(new Blockly.FieldDropdown(dropdown_emotion), "EMOTION");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -777,5 +864,290 @@ Blockly.Blocks['LedSetBrightness'] = {
     this.setNextStatement(true, null);
   },
 };
+/**************MECH***************/
+Blockly.Msg.MOONBOT_MECH = '机械臂';
+Blockly.Msg.MOONBOT_CLAW = '爪子';
+Blockly.Msg.MOONBOT_UPPER_ARM = '上臂';
+Blockly.Msg.MOONBOT_LOWER_ARM = '下臂';
+Blockly.Blocks['MechInit'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(new Blockly.FieldDropdown([["Mu00", "0"],["Mu01", "1"],["Mu10", "2"],["Mu11", "3"]]), "MU")
+        .appendField(Blockly.Msg.MOONBOT_INIT_ON)
+        .appendField(Blockly.Msg.MOONBOT_PORT)
+        .appendField(new Blockly.FieldDropdown(profile.moonbot.group_serial_port), "MU_PORT");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.MOONBOT_CLAW)
+        .appendField(Blockly.Msg.MOONBOT_INIT_ON)
+        .appendField(Blockly.Msg.MOONBOT_SERVO)
+        .appendField(new Blockly.FieldDropdown(profile.moonbot.group_servo), "CLAW");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.MOONBOT_UPPER_ARM)
+        .appendField(Blockly.Msg.MOONBOT_INIT_ON)
+        .appendField(Blockly.Msg.MOONBOT_SERVO)
+        .appendField(new Blockly.FieldDropdown(profile.moonbot.group_servo), "UPPER_ARM");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.MOONBOT_LOWER_ARM)
+        .appendField(Blockly.Msg.MOONBOT_INIT_ON)
+        .appendField(Blockly.Msg.MOONBOT_SERVO)
+        .appendField(new Blockly.FieldDropdown(profile.moonbot.group_servo), "LOWER_ARM");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  },
+};
+Blockly.Msg.MOONBOT_FOLLOW = '跟踪';
+Blockly.Blocks['MechSetBallX'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendValueInput("BALL_X")
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(Blockly.Msg.MOONBOT_FOLLOW+Blockly.Msg.MOONBOT_BALL+"X(0~100)=");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("通过设置此参数来调节跟球中心，>50往右偏，<50往左偏");
+  },
+};
+Blockly.Blocks['MechSetGrabBallY'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendValueInput("BALL_Y")
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(Blockly.Msg.MOONBOT_GRAB+Blockly.Msg.MOONBOT_BALL+"Y(0~100)=");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("通过设置此参数来调节抓球距离，数值越大，抓球距离越近");
+  },
+};
+Blockly.Blocks['MechSetCardX'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendValueInput("CARD_X")
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(Blockly.Msg.MOONBOT_FOLLOW+Blockly.Msg.MOONBOT_CARD+"X(0~100)=");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("通过设置此参数来调节投篮中心点，>50往右偏，<50往左偏");
+  },
+};
+Blockly.Blocks['MechSetShootCardWidth'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendValueInput("CARD_WIDTH")
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(Blockly.Msg.MOONBOT_SHOOT)
+        .appendField(Blockly.Msg.MOONBOT_CARD+"Width(0~100)=");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("通过设置此参数来调节投篮距离，数值越大，距离越近");
+  },
+};
+Blockly.Msg.MOONBOT_OPEN = '张开';
+Blockly.Msg.MOONBOT_CLOSE = '关闭';
+Blockly.Msg.MOONBOT_UP = '向上';
+Blockly.Msg.MOONBOT_DOWN = '向下';
+Blockly.Blocks['MechClawSet'] = {
+  init:function() {
+    var dropdown_claw_type = [[Blockly.Msg.MOONBOT_OPEN, "kClawOpen"],
+                              [Blockly.Msg.MOONBOT_CLOSE, "kClawClose"],
+                              [Blockly.Msg.MOONBOT_FORWARD, "kClawForward"],
+                              [Blockly.Msg.MOONBOT_BACKWARD, 'kClawBackward'],
+                              [Blockly.Msg.MOONBOT_UP, 'kClawUp'],
+                              [Blockly.Msg.MOONBOT_DOWN, 'kClawDown']];
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(Blockly.Msg.MOONBOT_CLAW)
+        .appendField(new Blockly.FieldDropdown(dropdown_claw_type), "CLAW_TYPE");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  },
+};
+Blockly.Msg.MOONBOT_SEARCH = "搜索";
+Blockly.Msg.MOONBOT_GRAB = "抓取";
+Blockly.Msg.MOONBOT_SHOOT = "投篮";
+Blockly.Msg.MOONBOT_BALL = "球";
+Blockly.Msg.MOONBOT_CARD = "卡片";
+Blockly.Blocks['MechSearchBall'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(Blockly.Msg.MOONBOT_SEARCH+Blockly.Msg.MOONBOT_BALL);
+    // this.setPreviousStatement(true, null);
+    // this.setNextStatement(true, null);
+    this.setOutput(true, Number);
+  },
+};
+Blockly.Blocks['MechGrabBall'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(Blockly.Msg.MOONBOT_GRAB+Blockly.Msg.MOONBOT_BALL);
+    this.setOutput(true, Number);
+  },
+};
+Blockly.Blocks['MechSearchCard'] = {
+  init:function() {
+    var dropdown_card = [
+      [Blockly.LKL_VS2_VISION_SHAPE_CARD, "VISION_SHAPE_CARD_DETECT"],
+      [Blockly.LKL_VS2_VISION_TRAFFIC_CARD, "VISION_TRAFFIC_CARD_DETECT"],
+      [Blockly.LKL_VS2_VISION_NUM_CARD, "VISION_NUM_CARD_DETECT"],
+    ];
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(Blockly.Msg.MOONBOT_SEARCH)
+        .appendField(new Blockly.FieldDropdown(dropdown_card), "CARD_TYPE");
+    this.setOutput(true, Number);
+  },
+};
+Blockly.Blocks['MechShootBall'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_MECH);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MOONBOT_MECH)
+        .appendField(Blockly.Msg.MOONBOT_SHOOT);
+    this.setOutput(true, Number);
+  },
+};
+/**************BOT***************/
+Blockly.Blocks.MoonBot.HUE_HUMANNOID = 346;
+Blockly.Msg.MOONBOT_HUMANNOID = '机器人';
+Blockly.Msg.MOONBOT_HEAD = '头部';
+Blockly.Msg.MOONBOT_ARM = '手';
+Blockly.Blocks['BotInit'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_HUMANNOID);
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.MOONBOT_HUMANNOID)
+        .appendField(Blockly.Msg.MOONBOT_HEAD)
+        .appendField(Blockly.Msg.MOONBOT_INIT_ON)
+        .appendField(Blockly.Msg.MOONBOT_SERVO)
+        .appendField(new Blockly.FieldDropdown(profile.moonbot.group_servo), "HEAD");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.MOONBOT_LEFT+Blockly.Msg.MOONBOT_ARM)
+        .appendField(Blockly.Msg.MOONBOT_INIT_ON)
+        .appendField(Blockly.Msg.MOONBOT_SERVO)
+        .appendField(new Blockly.FieldDropdown(profile.moonbot.group_servo), "LEFT_ARM");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.MOONBOT_RIGHT+Blockly.Msg.MOONBOT_ARM)
+        .appendField(Blockly.Msg.MOONBOT_INIT_ON)
+        .appendField(Blockly.Msg.MOONBOT_SERVO)
+        .appendField(new Blockly.FieldDropdown(profile.moonbot.group_servo), "RIGHT_ARM");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  },
+};
+Blockly.Msg.MOONBOT_BOTH = '双';
+Blockly.Blocks['BotShakeArm'] = {
+  init:function() {
+    var dropdown_hands_type = [
+      [Blockly.Msg.MOONBOT_LEFT+Blockly.Msg.MOONBOT_ARM, "kMoonBotLeftArm"],
+      [Blockly.Msg.MOONBOT_RIGHT+Blockly.Msg.MOONBOT_ARM, "kMoonBotRightArm"],
+      [Blockly.Msg.MOONBOT_BOTH+Blockly.Msg.MOONBOT_ARM, "kMoonBotBothArm"],
+    ];
+    var dropdown_speed = [
+      [Blockly.Msg.MOONBOT_FAST, "100"],
+      [Blockly.Msg.MOONBOT_MIDDLE, "200"],
+      [Blockly.Msg.MOONBOT_SLOW, "300"],
+    ];
+    this.setColour(Blockly.Blocks.MoonBot.HUE_HUMANNOID);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MOONBOT_HUMANNOID)
+        .appendField("招手")
+        .appendField(new Blockly.FieldDropdown(dropdown_hands_type), "ARM_TYPE");
+    this.appendValueInput("OFFSET")
+        .appendField("幅度"+"(°)");
+    this.appendDummyInput()
+        .appendField("速度")
+        .appendField(new Blockly.FieldDropdown(dropdown_speed), "WAIT");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  },
+};
+Blockly.Blocks['BotSwing'] = {
+  init:function() {
+    var dropdown_motor_type = [
+      [Blockly.Msg.MOONBOT_LEFT+Blockly.Msg.MOONBOT_MOTOR, "kMoonBotLeftMotor"],
+      [Blockly.Msg.MOONBOT_RIGHT+Blockly.Msg.MOONBOT_MOTOR, "kMoonBotRightMotor"],
+      [Blockly.Msg.MOONBOT_BOTH+Blockly.Msg.MOONBOT_MOTOR, "kMoonBotBothMotor"],
+    ];
+    var dropdown_speed = [
+      [Blockly.Msg.MOONBOT_FAST, "80"],
+      [Blockly.Msg.MOONBOT_MIDDLE, "120"],
+      [Blockly.Msg.MOONBOT_SLOW, "160"],
+    ];
+    this.setColour(Blockly.Blocks.MoonBot.HUE_HUMANNOID);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MOONBOT_HUMANNOID)
+        .appendField("摆动")
+        .appendField(new Blockly.FieldDropdown(dropdown_motor_type), "MOTOR_TYPE")
+        .appendField("速度")
+        .appendField(new Blockly.FieldDropdown(dropdown_speed), "WAIT");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("机器人晃动身体并甩头");
+  },
+};
+Blockly.Blocks['BotShakeBody'] = {
+  init:function() {
+    var dropdown_speed = [
+      [Blockly.Msg.MOONBOT_SLOW, "60"],
+      [Blockly.Msg.MOONBOT_MIDDLE, "90"],
+      [Blockly.Msg.MOONBOT_FAST, "120"],
+    ];
+    this.setColour(Blockly.Blocks.MoonBot.HUE_HUMANNOID);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MOONBOT_HUMANNOID)
+        .appendField("左右晃动身体")
+        .appendField("速度")
+        .appendField(new Blockly.FieldDropdown(dropdown_speed), "SPEED");
+    this.appendValueInput("TIME")
+        .appendField("时间"+"(ms)");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("机器人左右晃动身体");
+  },
+};
+Blockly.Blocks['BotTwistBody'] = {
+  init:function() {
+    var dropdown_speed = [
+      [Blockly.Msg.MOONBOT_SLOW, "60"],
+      [Blockly.Msg.MOONBOT_MIDDLE, "100"],
+      [Blockly.Msg.MOONBOT_FAST, "140"],
+    ];
+    this.setColour(Blockly.Blocks.MoonBot.HUE_HUMANNOID);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MOONBOT_HUMANNOID)
+        .appendField("向前一步")
+        .appendField("速度")
+        .appendField(new Blockly.FieldDropdown(dropdown_speed), "SPEED");
+    this.appendValueInput("TIME")
+        .appendField("时间"+"(ms)");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("机器人双轮向前迈出一步，参数`时间`数值越大，步子迈的越大");
+  },
+};
+
+
 
 

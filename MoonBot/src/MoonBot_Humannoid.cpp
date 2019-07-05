@@ -100,7 +100,7 @@ void MoonBotHumannoid::swing(moonbot_humannoid_motor_t motor_type,
         return;
     }
     delay(1);
-  } while (wheel_speed!=speed);
+  } while (wheel_speed!=-speed*2/3);
   head_.write(head_angle);
   delay(wait*3);
   TankBase.write(0, 0);

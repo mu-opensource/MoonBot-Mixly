@@ -139,6 +139,7 @@
 		<block type="SpeakerInit"></block>
 		<block type="SpeakerPlayMode"></block>
 		<block type="SpeakerPlay"></block>
+		<block type="SpeakerPlayName"></block>
 		<block type="SpeakerSet"></block>
 		<block type="SpeakerSetVolume">
 			<value name="VOLUME">
@@ -240,6 +241,75 @@
 			</value>
 		</block>
 	</category>
+	<!-- <category id="MoonBot_Mech" name="MECH" colour="76">
+		<block type="MechInit">
+			<field name="MU_PORT">Serial3</field>
+			<field name="CLAW">kServo4</field>
+			<field name="UPPER_ARM">kServo1</field>
+			<field name="LOWER_ARM">kServo3</field>
+		</block>
+		<block type="MechSetBallX">
+			<value name="BALL_X">
+				<shadow type="math_number">
+					<field name="NUM">50</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="MechSetGrabBallY">
+			<value name="BALL_Y">
+				<shadow type="math_number">
+					<field name="NUM">70</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="MechSetCardX">
+			<value name="CARD_X">
+				<shadow type="math_number">
+					<field name="NUM">50</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="MechSetShootCardWidth">
+			<value name="CARD_WIDTH">
+				<shadow type="math_number">
+					<field name="NUM">48</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="MechSearchBall"></block>
+		<block type="MechGrabBall"></block>
+		<block type="MechSearchCard"></block>
+		<block type="MechShootBall"></block>
+	</category>
+	<category id="MoonBot_Humannoid" name="Bot" colour="76">
+		<block type="BotInit">
+			<field name="HEAD">kServo3</field>
+			<field name="LEFT_ARM">kServo4</field>
+			<field name="RIGHT_ARM">kServo1</field>
+		</block>
+		<block type="BotShakeArm">
+			<value name="OFFSET">
+				<shadow type="math_number">
+					<field name="NUM">15</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="BotSwing"></block>
+		<block type="BotShakeBody">
+			<value name="TIME">
+				<shadow type="math_number">
+					<field name="NUM">500</field>
+				</shadow>
+			</value>
+		</block>
+		<block type="BotTwistBody">
+			<value name="TIME">
+				<shadow type="math_number">
+					<field name="NUM">500</field>
+				</shadow>
+			</value>
+		</block>
+	</category> -->
 </category>
 
 
