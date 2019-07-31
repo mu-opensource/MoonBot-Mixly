@@ -242,7 +242,7 @@ Blockly.Arduino.SpeakerSetVolume = function() {
 };
 Blockly.Arduino.BuzzerPlayToneForBeat = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
-    Blockly.Arduino.definitions_[key_beat] = 'int m_beat = 500;';
+    Blockly.Arduino.definitions_[key_beat] = 'uint32_t m_beat = 500;';
     Blockly.Arduino.setups_[key_beat] = 'pinMode(MOONBOT_PIN_BUZZER_SIG, OUTPUT);\n  pinMode(MOONBOT_PIN_BUZZER_SHDW, OUTPUT);\n  digitalWrite(MOONBOT_PIN_BUZZER_SHDW, LOW);';
     var tone = this.getFieldValue('TONE');
     var beat = this.getFieldValue('BEAT');
@@ -255,7 +255,7 @@ noTone(MOONBOT_PIN_BUZZER_SIG);\n\
 };
 Blockly.Arduino.BuzzerPauseBeat = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
-    Blockly.Arduino.definitions_[key_beat] = 'int m_beat = 500;';
+    Blockly.Arduino.definitions_[key_beat] = 'uint32_t m_beat = 500;';
     Blockly.Arduino.setups_[key_beat] = 'pinMode(MOONBOT_PIN_BUZZER_SIG, OUTPUT);\n  pinMode(MOONBOT_PIN_BUZZER_SHDW, OUTPUT);\n  digitalWrite(MOONBOT_PIN_BUZZER_SHDW, LOW);';
     var beat = this.getFieldValue('BEAT');
     var code = 'delay(m_beat*'+beat+'/BEAT_FRACTION_WHOLE);\n';
@@ -263,16 +263,16 @@ Blockly.Arduino.BuzzerPauseBeat = function() {
 };
 Blockly.Arduino.BuzzerSetTempo = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
-    Blockly.Arduino.definitions_[key_beat] = 'int m_beat = 500;';
+    Blockly.Arduino.definitions_[key_beat] = 'uint32_t m_beat = 500;';
     Blockly.Arduino.setups_[key_beat] = 'pinMode(MOONBOT_PIN_BUZZER_SIG, OUTPUT);\n  pinMode(MOONBOT_PIN_BUZZER_SHDW, OUTPUT);\n  digitalWrite(MOONBOT_PIN_BUZZER_SHDW, LOW);';
     var tempo = Blockly.Arduino.valueToCode(this, 'TEMPO',
                     Blockly.Arduino.ORDER_NONE) || '120';
-    var code = 'm_beat = 1000*60/'+tempo+';\n';
+    var code = 'm_beat = (uint32_t)1000*60/'+tempo+';\n';
     return code;
 };
 Blockly.Arduino.BuzzerRing = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
-    Blockly.Arduino.definitions_[key_beat] = 'int m_beat = 500;';
+    Blockly.Arduino.definitions_[key_beat] = 'uint32_t m_beat = 500;';
     Blockly.Arduino.setups_[key_beat] = 'pinMode(MOONBOT_PIN_BUZZER_SIG, OUTPUT);\n  pinMode(MOONBOT_PIN_BUZZER_SHDW, OUTPUT);\n  digitalWrite(MOONBOT_PIN_BUZZER_SHDW, LOW);';
     var frequency = Blockly.Arduino.valueToCode(this, 'FREQUENCY',
                     Blockly.Arduino.ORDER_NONE) || '100';
@@ -283,7 +283,7 @@ Blockly.Arduino.BuzzerRing = function() {
 };
 Blockly.Arduino.BuzzerStop = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
-    Blockly.Arduino.definitions_[key_beat] = 'int m_beat = 500;';
+    Blockly.Arduino.definitions_[key_beat] = 'uint32_t m_beat = 500;';
     Blockly.Arduino.setups_[key_beat] = 'pinMode(MOONBOT_PIN_BUZZER_SIG, OUTPUT);\n  pinMode(MOONBOT_PIN_BUZZER_SHDW, OUTPUT);\n  digitalWrite(MOONBOT_PIN_BUZZER_SHDW, LOW);';
     var code = 'noTone(MOONBOT_PIN_BUZZER_SIG);\n';
     return code;
@@ -304,14 +304,14 @@ Blockly.Arduino.IrSensorInit = function() {
 Blockly.Arduino.TouchSensorRead = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
     var port = this.getFieldValue('PORT');
-    var code = '(!digitalRead(moonbotPortToPin('+port+', kPortPin1)))';
+    var code = 'digitalRead(moonbotPortToPin('+port+', kPortPin1))';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.IrSensorRead = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
     var port = this.getFieldValue('PORT');
     var pin = this.getFieldValue('PIN');
-    var code = 'digitalRead(moonbotPortToPin('+port+', '+pin+'))';
+    var code = '(!digitalRead(moonbotPortToPin('+port+', '+pin+')))';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.ButtonPress = function() {
@@ -320,10 +320,10 @@ Blockly.Arduino.ButtonPress = function() {
     var code = '';
     switch(button) {
         case 'A&B':
-            code = '(isButtonPressed(MOONBOT_PIN_BUTTON_A) && isButtonPressed(MOONBOT_PIN_BUTTON_B))';
+            code = '(!digitalRead(MOONBOT_PIN_BUTTON_A) && !digitalRead(MOONBOT_PIN_BUTTON_B))';
             break;
         default:
-            code = 'isButtonPressed('+button+')';
+            code = '(!digitalRead('+button+'))';
             break;
     }
     return [code, Blockly.Arduino.ORDER_ATOMIC];
@@ -345,8 +345,8 @@ Blockly.Arduino.IMUCompassCalibrate = function() {
 Blockly.Arduino.IMUReadCompass = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
     Blockly.Arduino.setups_[key_imu_begin] = 'IMU.enable();';
-    var code = 'IMU.getMagAngle();\n';
-    return code;
+    var code = 'IMU.getMagAngle()';
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.IMUReadAcceleration = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
@@ -414,8 +414,113 @@ Blockly.Arduino.EyesShowColor = function() {
 Blockly.Arduino.EyesShowEmotion = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
     Blockly.Arduino.setups_['moonbot_eyes'+'begin'] = 'moonbot_eyes.begin();'
-    // FIXME
-    var code = '// FIXME not ready for this block\n';
+    var emotion = this.getFieldValue('EMOTION');
+    var code = '';
+    switch (emotion) {
+        case 'smile':
+            code += '\
+moonbot_eyes.setPixelColor(0, 0x003030);\n\
+moonbot_eyes.setPixelColor(1, 0x003030);\n\
+moonbot_eyes.setPixelColor(2, 0x000000);\n\
+moonbot_eyes.setPixelColor(3, 0x000000);\n\
+moonbot_eyes.setPixelColor(4, 0x000000);\n\
+moonbot_eyes.setPixelColor(5, 0x003030);\n\
+moonbot_eyes.setPixelColor(6, 0x003030);\n\
+moonbot_eyes.setPixelColor(7, 0x003030);\n\
+moonbot_eyes.setPixelColor(8, 0x000000);\n\
+moonbot_eyes.setPixelColor(9, 0x000000);\n\
+moonbot_eyes.setPixelColor(10, 0x000000);\n\
+moonbot_eyes.setPixelColor(11, 0x003030);\n\
+moonbot_eyes.show();\n';
+            break;
+        case 'angry':
+            code += '\
+for (int j = 1; j <= 1; j = j + (1)) {\n\
+    for (int i = 0; i <= 200; i = i + (4)) {\n\
+        moonbot_eyes.setBrightness(i);\n\
+        moonbot_eyes.fill(0xff0000, 0, 0);\n\
+        moonbot_eyes.show();\n\
+        delay(2);\n\
+    }\n\
+    for (int i = 200; i >= 0; i = i + (-4)) {\n\
+        moonbot_eyes.setBrightness(i);\n\
+        moonbot_eyes.fill(0xff0000, 0, 0);\n\
+        moonbot_eyes.show();\n\
+        delay(1);\n\
+    }\n\
+}\n\
+for (int i = 0; i <= 200; i = i + (4)) {\n\
+    moonbot_eyes.setBrightness(i);\n\
+    moonbot_eyes.fill(0xff0000, 0, 0);\n\
+    moonbot_eyes.show();\n\
+    delay(2);\n\
+}\n\
+moonbot_eyes.setBrightness(255);\n\
+            ';
+            break
+        case 'sad':
+            code += '\n\
+moonbot_eyes.clear();\n\
+for (int j = 1; j <= 1; j = j + (1)) {\n\
+    for (int i = 50; i <= 150; i = i + (1)) {\n\
+        moonbot_eyes.setBrightness(i);\n\
+        moonbot_eyes.setPixelColor(2, 0x00ffff);\n\
+        moonbot_eyes.setPixelColor(10, 0x00ffff);\n\
+        moonbot_eyes.show();\n\
+        delay(4);\n\
+    }\n\
+    for (int i = 150; i >= 50; i = i + (-1)) {\n\
+        moonbot_eyes.setBrightness(i);\n\
+        moonbot_eyes.setPixelColor(2, 0x00ffff);\n\
+        moonbot_eyes.setPixelColor(10, 0x00ffff);\n\
+        moonbot_eyes.show();\n\
+        delay(4);\n\
+    }\n\
+}\n\
+for (int i = 50; i <= 150; i = i + (1)) {\n\
+    moonbot_eyes.setBrightness(i);\n\
+    moonbot_eyes.setPixelColor(2, 0x00ffff);\n\
+    moonbot_eyes.setPixelColor(10, 0x00ffff);\n\
+    moonbot_eyes.show();\n\
+    delay(4);\n\
+}\n\
+moonbot_eyes.setBrightness(255);\n\
+colorFade(moonbot_eyes, 0, 0, 0,3);\n\
+            ';
+            break;
+        case 'look_right':
+            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookRight, 0x003030);\n';
+            break;
+        case 'look_left':
+            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookLeft, 0x003030);\n';
+            break;
+        case 'look_up':
+            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookUp, 0x003030);\n';
+            break;
+        case 'look_down':
+            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookDown, 0x003030);\n';
+            break;
+        case 'circle':
+            code += '\n\
+colorWipe(moonbot_eyes, (0), 40);\n\
+colorWipe(moonbot_eyes, 0x3030, 40);\n\
+            ';
+            break;
+        case 'flash':
+            code += '\n\
+theaterChase(moonbot_eyes, 0x3030, 40);\n\
+colorFade(moonbot_eyes, 0, 0, 0,3);\n\
+            ';
+            break;
+        case 'rainbow':
+            code += '\
+rainbowCycle(moonbot_eyes, 1);\n\
+colorFade(moonbot_eyes, 0, 0, 0,3);\n\
+            ';
+            break;
+        default:
+            break;
+    }
     return code;
 };
 Blockly.Arduino.LedSetColor = function() {
@@ -445,7 +550,7 @@ Blockly.Arduino.LedSetColorHSV = function() {
                 Blockly.Arduino.ORDER_NONE) || '0';
     var v = Blockly.Arduino.valueToCode(this, "V_VALUE",
                 Blockly.Arduino.ORDER_NONE) || '0';
-    var code = led_type+'.setPixelColor('+led_num+', Adafruit_NeoPixel::ColorHSV('+h+', '+s+', '+v+'));\n';
+    var code = led_type+'.setPixelColor('+led_num+', Adafruit_NeoPixel::ColorHSV(map('+h+', 0, 360, 0, 65535), '+s+', '+v+'));\n';
     return code;
 };
 Blockly.Arduino.LedShow = function() {
@@ -474,6 +579,9 @@ Blockly.Arduino.LedSetBrightness = function() {
 /**************MECH***************/
 Blockly.Arduino.MechInit = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
+    if (Blockly.Arduino.setups_[key_tankbase_begin] == undefined) {
+        Blockly.Arduino.setups_[key_tankbase_begin] = 'TankBase.begin();';
+    }
     var code = '';
     var mu = this.getFieldValue('MU');
     var mu_port = this.getFieldValue('MU_PORT');
@@ -486,31 +594,36 @@ Blockly.Arduino.MechInit = function() {
     Blockly.Arduino.setups_['servo_'+upper_arm+'_begin'] = 'm_servo['+upper_arm+'].attach('+upper_arm+');';
     Blockly.Arduino.setups_['servo_'+lower_arm+'_begin'] = 'm_servo['+lower_arm+'].attach('+lower_arm+');';
 
+    if (Blockly.Arduino.setups_['setup_serial_' + mu_port + profile.default.serial]) {
+    } else {
+        Blockly.Arduino.setups_['setup_serial_' + mu_port + profile.default.serial] = mu_port + '.begin(115200);';
+    }
+    code += 'm_servo['+upper_arm+'].reverse(true);\n';
+    code += 'm_servo['+lower_arm+'].reverse(true);\n';
     code += 'Mu'+mu+'.begin(&'+mu_port+', kSerialMode);\n';
     return code;
 };
-Blockly.Arduino.MechSetBallX = function() {
+Blockly.Arduino.MechSetGrabBallPosition = function() {
     var ball_x = Blockly.Arduino.valueToCode(this, 'BALL_X',
                     Blockly.Arduino.ORDER_NONE) || '50';
-    var code = 'mech.ball_center_x_ = '+ball_x+';\n';
-    return code;
-};
-Blockly.Arduino.MechSetGrabBallY = function() {
     var ball_y = Blockly.Arduino.valueToCode(this, 'BALL_Y',
                     Blockly.Arduino.ORDER_NONE) || '70';
-    var code = 'mech.ball_grab_y_ = '+ball_y+';\n';
+    var code = 'mech.ball_center_x_ = '+ball_x+';\n';
+    code += 'mech.ball_grab_y_ = '+ball_y+';\n';
     return code;
 };
-Blockly.Arduino.MechSetCardX = function() {
+Blockly.Arduino.MechSetShootBallCondition = function() {
     var card_x = Blockly.Arduino.valueToCode(this, 'CARD_X',
                     Blockly.Arduino.ORDER_NONE) || '50';
     var code = 'mech.card_center_x_ = '+card_x+';\n';
+    var card_width = Blockly.Arduino.valueToCode(this, 'CARD_WIDTH',
+                    Blockly.Arduino.ORDER_NONE) || '48';
+    code += 'mech.shoot_card_width_ = '+card_width+';\n';
     return code;
 };
-Blockly.Arduino.MechSetShootCardWidth = function() {
-    var ball_x = Blockly.Arduino.valueToCode(this, 'CARD_WIDTH',
-                    Blockly.Arduino.ORDER_NONE) || '48';
-    var code = 'mech.shoot_card_width_ = '+ball_x+';\n';
+Blockly.Arduino.MechClawSet = function() {
+    var claw_type = this.getFieldValue('CLAW_TYPE');
+    var code = 'mech.setClaw('+claw_type+');\n';
     return code;
 };
 Blockly.Arduino.MechSearchBall = function() {
@@ -519,45 +632,35 @@ Blockly.Arduino.MechSearchBall = function() {
 };
 Blockly.Arduino.MechGrabBall = function() {
     var code = '\
-[]()->bool{\
+[&mech]()->bool {\
   for(;;) {\
     switch(mech.grabBall()) {\
+      case kFollowBall:\
+        break;\
       case kGrabedBall:\
         return true;\
       case kUndetectBall:\
         return false;\
       default:\
-        return false;\
+        break;\
     }\
   }\
-}';
+}()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.MechSearchCard = function() {
     var card_type = this.getFieldValue('CARD_TYPE');
     Blockly.Arduino.setups_['MECHSearchCardType'] = 'mech.card_type_ = '+card_type+';';
     var code = '\
-[]()->bool{\
+[&mech]()->bool{\
   while(!mech.searchCard());\
   return true;\
-}';
+}()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Arduino.MechShootBall = function() {
-    var code = '\
-[]()->bool{\
-  for(;;) {\
-    switch(mech.shootBall()) {\
-      case kShootedBall:\
-        return true;\
-      case kUndetectCard:\
-        return false;\
-      default:\
-        return false;\
-    }\
-  }\
-}';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    var code = 'while(mech.shootBall() != kShootedBall);\n';
+    return code;
 };
 /**************BOT***************/
 Blockly.Arduino.BotInit = function() {
@@ -566,7 +669,7 @@ Blockly.Arduino.BotInit = function() {
     var head = this.getFieldValue('HEAD');
     var left_arm = this.getFieldValue('LEFT_ARM');
     var right_arm = this.getFieldValue('RIGHT_ARM');
-    Blockly.Arduino.definitions_['MoonMECH'] = 'MoonBotHumannoid moonbot(Mu, m_servo['+head+'], m_servo['+left_arm+'], m_servo['+right_arm+']);';
+    Blockly.Arduino.definitions_['MoonBot'] = 'MoonBotHumannoid moonbot(Mu, m_servo['+head+'], m_servo['+left_arm+'], m_servo['+right_arm+']);';
     Blockly.Arduino.setups_['servo_'+head+'_begin'] = 'm_servo['+head+'].attach('+head+');';
     Blockly.Arduino.setups_['servo_'+left_arm+'_begin'] = 'm_servo['+left_arm+'].attach('+left_arm+');';
     Blockly.Arduino.setups_['servo_'+right_arm+'_begin'] = 'm_servo['+right_arm+'].attach('+right_arm+');';
@@ -601,6 +704,13 @@ Blockly.Arduino.BotTwistBody = function() {
     var time = Blockly.Arduino.valueToCode(this, 'TIME',
     Blockly.Arduino.ORDER_NONE) || '500';
     var code = 'moonbot.bodyTwist('+speed+', '+time+');\n';
+    return code;
+};
+Blockly.Arduino.BotNod = function() {
+    var offset = Blockly.Arduino.valueToCode(this, 'OFFSET',
+                Blockly.Arduino.ORDER_NONE) || '10';
+    var wait = this.getFieldValue('WAIT');
+    var code = 'moonbot.nod('+offset+', '+wait+'*'+offset+'/2);\n';
     return code;
 };
 

@@ -222,12 +222,12 @@
 			</value>
 			<value name="S_VALUE">
 				<shadow type="math_number">
-					<field name="NUM">0</field>
+					<field name="NUM">255</field>
 				</shadow>
 			</value>
 			<value name="V_VALUE">
 				<shadow type="math_number">
-					<field name="NUM">0</field>
+					<field name="NUM">255</field>
 				</shadow>
 			</value>
 		</block>
@@ -241,47 +241,44 @@
 			</value>
 		</block>
 	</category>
-	<!-- <category id="MoonBot_Mech" name="MECH" colour="76">
+	<category id="MoonBot_Mech" name="机械臂" colour="#8CB200">
 		<block type="MechInit">
 			<field name="MU_PORT">Serial3</field>
-			<field name="CLAW">kServo4</field>
-			<field name="UPPER_ARM">kServo1</field>
+			<field name="CLAW">kServo1</field>
+			<field name="UPPER_ARM">kServo4</field>
 			<field name="LOWER_ARM">kServo3</field>
 		</block>
-		<block type="MechSetBallX">
+		<block type="MechSetGrabBallPosition">
 			<value name="BALL_X">
 				<shadow type="math_number">
 					<field name="NUM">50</field>
 				</shadow>
 			</value>
-		</block>
-		<block type="MechSetGrabBallY">
 			<value name="BALL_Y">
 				<shadow type="math_number">
 					<field name="NUM">70</field>
 				</shadow>
 			</value>
 		</block>
-		<block type="MechSetCardX">
+		<block type="MechSetShootBallCondition">
 			<value name="CARD_X">
 				<shadow type="math_number">
 					<field name="NUM">50</field>
 				</shadow>
 			</value>
-		</block>
-		<block type="MechSetShootCardWidth">
 			<value name="CARD_WIDTH">
 				<shadow type="math_number">
 					<field name="NUM">48</field>
 				</shadow>
 			</value>
 		</block>
+		<block type="MechClawSet"></block>
 		<block type="MechSearchBall"></block>
 		<block type="MechGrabBall"></block>
 		<block type="MechSearchCard"></block>
 		<block type="MechShootBall"></block>
 	</category>
-	<category id="MoonBot_Humannoid" name="Bot" colour="76">
+	<category id="MoonBot_Humannoid" name="机器人" colour="#5631A8">
 		<block type="BotInit">
 			<field name="HEAD">kServo3</field>
 			<field name="LEFT_ARM">kServo4</field>
@@ -309,7 +306,14 @@
 				</shadow>
 			</value>
 		</block>
-	</category> -->
+		<block type="BotNod">
+			<value name="OFFSET">
+				<shadow type="math_number">
+					<field name="NUM">15</field>
+				</shadow>
+			</value>
+		</block>
+	</category>
 </category>
 
 

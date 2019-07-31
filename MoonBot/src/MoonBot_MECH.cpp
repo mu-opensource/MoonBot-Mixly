@@ -146,20 +146,27 @@ void MoonBotMECH::SetVision(MuVisionType vision_type) {
   }
 }
 
-void MoonBotMECH::UpdateResult(MuVisionType vision_type) {
-  Mu_->GetValue(vision_type, kStatus);
-  switch (vision_type) {
-    case VISION_BALL_DETECT:
-      ball_x_ = Mu_->GetValue(vision_type, kXValue);
-      break;
-    case VISION_SHAPE_CARD_DETECT:
-    case VISION_TRAFFIC_CARD_DETECT:
-    case VISION_NUM_CARD_DETECT:
-      card_x_ = Mu_->GetValue(vision_type, kXValue);
-      break;
-    default:
-      break;
+bool MoonBotMECH::UpdateResult(MuVisionType vision_type) {
+  if (Mu_->UpdateResult(vision_type, false)&vision_type) {
+    switch (vision_type) {
+      case VISION_BALL_DETECT:
+        if (Mu_->read(vision_type, kStatus)) {
+          ball_x_ = Mu_->GetValue(vision_type, kXValue);
+        }
+        break;
+      case VISION_SHAPE_CARD_DETECT:
+      case VISION_TRAFFIC_CARD_DETECT:
+      case VISION_NUM_CARD_DETECT:
+        if (Mu_->read(vision_type, kStatus)) {
+          card_x_ = Mu_->GetValue(vision_type, kXValue);
+        }
+        break;
+      default:
+        break;
+    }
+    return true;
   }
+  return false;
 }
 
 void MoonBotMECH::SetZoom(MuVsCameraZoom zoom) {
@@ -215,7 +222,9 @@ bool MoonBotMECH::searchBall(void) {
 //    }
 //  }
   SetVision(VISION_BALL_DETECT);
-  UpdateResult(VISION_BALL_DETECT);
+  if (UpdateResult(VISION_BALL_DETECT) == false) {
+    return false;
+  }
   if (Mu_->read(VISION_BALL_DETECT, kStatus)) {
     TankBase.write(0, 0);
     return true;
@@ -233,7 +242,9 @@ moonbot_mech_grab_ball_t MoonBotMECH::grabBall(void) {
   static bool is_grab = false;
   is_time2search_ball_.start(time2search_ball_, AsyncDelay::MILLIS);
   SetVision(VISION_BALL_DETECT);
-  UpdateResult(VISION_BALL_DETECT);
+  if (UpdateResult(VISION_BALL_DETECT) == false) {
+    return kFollowBall;
+  }
   if (Mu_->read(VISION_BALL_DETECT, kStatus) == 0) {
     TankBase.write(0, 0);
     is_grab = false;
@@ -288,7 +299,9 @@ moonbot_mech_grab_ball_t MoonBotMECH::grabBall(void) {
 
 bool MoonBotMECH::searchCard(void) {
   SetVision(card_type_);
-  UpdateResult(card_type_);
+  if (UpdateResult(card_type_) == false) {
+    return false;
+  }
   if (Mu_->read(card_type_, kStatus)) {
     TankBase.write(0, 0);
     return true;
@@ -327,7 +340,9 @@ bool MoonBotMECH::searchCard(void) {
 
 moonbot_mech_shoot_ball_t MoonBotMECH::shootBall(void) {
   SetVision(card_type_);
-  UpdateResult(card_type_);
+  if (UpdateResult(card_type_) == false) {
+    return kFollowCard;
+  }
   if (Mu_->read(card_type_, kStatus) == 0) {
     TankBase.write(0, 0);
     upper_arm_.write(upper_arm_grabbed_);

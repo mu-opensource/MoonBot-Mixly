@@ -75,7 +75,7 @@ class MoonBotMECH {
 
  protected:
   void SetVision(MuVisionType vision_type);
-  void UpdateResult(MuVisionType vision_type);
+  bool UpdateResult(MuVisionType vision_type);
   void SetZoom(MuVsCameraZoom zoom);
 
   MuVisionSensor* Mu_;

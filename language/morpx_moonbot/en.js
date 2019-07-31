@@ -74,9 +74,10 @@ Blockly.Msg.MOONBOT_ENCODER = 'encoder';                        //'编码器';
 
 /*   Parameter  */
 // speaker play mode
-Blockly.Msg.MOONBOT_SPEAKER_SINGLE = 'single';                  //'单曲';
-Blockly.Msg.MOONBOT_REPEAT = 'repeat';                          //'循环';
-Blockly.Msg.MOONBOT_RANDOM = 'random';                          //'随机';
+Blockly.Msg.MOONBOT_SPEAKER_SINGLE = 'single ';                  //'单曲';
+Blockly.Msg.MOONBOT_REPEAT = 'repeat ';                          //'循环';
+Blockly.Msg.MOONBOT_RANDOM = 'random ';                          //'随机';
+Blockly.Msg.MOONBOT_ALL = ' all';                                //'所有';
 // music middle
 Blockly.Msg.MOONBOT_TEMPO = 'tempo';                            //'节拍';
 Blockly.Msg.MOONBOT_TONE = 'tone';                              //'音调';
@@ -115,6 +116,47 @@ Blockly.Msg.MOONBOT_SHAKE = 'shake';                            //'震动';
 Blockly.Msg.MOONBOT_FREE_FALL = 'free fall';                    //'自由落体';
 Blockly.Msg.MOONBOT_ON = 'on';                                  //'在';
 
+// Eyes emotion
+Blockly.Msg.MOONBOT_HAPPY = 'happy';
+Blockly.Msg.MOONBOT_ANGRY = 'angry';
+Blockly.Msg.MOONBOT_SAD = 'sad';
+Blockly.Msg.MOONBOT_CIRCLE = 'circle';
+Blockly.Msg.MOONBOT_FLASH = 'flash';
+Blockly.Msg.MOONBOT_RAINBOW = 'rainbow';
+Blockly.Msg.MOONBOT_LOOK_RIGHT = 'look right';
+Blockly.Msg.MOONBOT_LOOK_LEFT = 'look left';
+Blockly.Msg.MOONBOT_LOOK_UP = 'look up';
+Blockly.Msg.MOONBOT_LOOK_DOWN = 'look down';
+
+// MECH
+Blockly.Msg.MOONBOT_MECH = 'MECH';                              //'机械臂';
+Blockly.Msg.MOONBOT_CLAW = 'claw';                              //'爪子';
+Blockly.Msg.MOONBOT_UPPER_ARM = 'upper arm';                    //'上臂';
+Blockly.Msg.MOONBOT_LOWER_ARM = 'lower arm';                    //'下臂';
+Blockly.Msg.MOONBOT_GRAB_BALL_POSITION = 'grab ball position';  //'球抓取位置';
+Blockly.Msg.MOONBOT_SHOOT_BALL_CONDITION = 'shoot ball condition';//'投篮条件';
+Blockly.Msg.MOONBOT_WIDTH = 'width';                            //'宽度';
+Blockly.Msg.MOONBOT_OPEN = 'open';                              //'张开';
+Blockly.Msg.MOONBOT_CLOSE = 'close';                            //'关闭';
+Blockly.Msg.MOONBOT_UP = 'up';                                  //'向上';
+Blockly.Msg.MOONBOT_DOWN = 'down';                              //'向下';
+Blockly.Msg.MOONBOT_SEARCH = 'searched';                        //"找到";
+Blockly.Msg.MOONBOT_GRAB = 'grabed';                            //"抓到";
+Blockly.Msg.MOONBOT_SHOOT = 'shoot ball';                       //"投篮";
+Blockly.Msg.MOONBOT_BALL = ' ball';                             //"球";
+Blockly.Msg.MOONBOT_CARD = ' card';                             //"卡片";
+
+// Bot
+Blockly.Msg.MOONBOT_HUMANNOID = 'Robot';                        //'机器人';
+Blockly.Msg.MOONBOT_HEAD = 'head';                              //'头部';
+Blockly.Msg.MOONBOT_ARM = 'arm';                                //'手';
+Blockly.Msg.MOONBOT_BOTH = 'both ';                             //'双';
+Blockly.Msg.MOONBOT_SHAKE_ARM = 'shake arm';                    //'招手';
+Blockly.Msg.MOONBOT_SWING = 'swing';                            //'摆动';
+Blockly.Msg.MOONBOT_SWAY_BODY = 'sway body';                    //'左右晃动身体';
+Blockly.Msg.MOONBOT_TAKE_A_STEP = 'take a step';                //'向前迈步';
+Blockly.Msg.MOONBOT_NOD = 'nod';                                //'点头';
+
 /*Help文本*/
 Blockly.Msg.MOONBOT_TIP_RPM_CALIBRATE = 'tank base straight line offset correction, >100% right correction, <100% left correction';//'底盘直行偏移校正，>100%向右校正，<100%向左校正';
 Blockly.Msg.MOONBOT_TIP_DISTANCE_CALIBRATE = 'tank base straight line distance correction, >100% forward correction, <100% backward correction';//'底盘直行距离校正，>100%向前校正，<100%向后校正';
@@ -125,3 +167,9 @@ Blockly.Msg.MOONBOT_TIP_SERVO_SET = 'Preset servo angle and running speed, used 
 Blockly.Msg.MOONBOT_TIP_MOVE_ALL_SERVO = 'move all servo to preset angle, used with block ['+Blockly.Msg.MOONBOT_SERVO+Blockly.Msg.MOONBOT_PRESET+Blockly.Msg.MOONBOT_ANGLE+']';
 Blockly.Msg.MOONBOT_TIP_SERVO_REVERSE = 'flip servo running direction';//'翻转舵机运行方向';
 Blockly.Msg.MOONBOT_TIP_SPEAKER_PALY_NAME = 'Play music, just enter the first 4 words of the music name, multiple input is invalid';            //'播放音乐，音乐名称只要输入前4个字即可，多输入无效';
+Blockly.Msg.MOONBOT_TIP_IMU_COMPASS_CALIBRATE = 'Compass correction, the main control should be rotated several times in the shape of `∞` (refer to the mobile phone compass calibration)';       //'指南针校正，校正时需将主控以`∞`字形转动数次（参考手机指南针校准）';
+Blockly.Msg.MOONBOT_TIP_IMU_READ_COMPASS = 'Read the compass angle, the value range is (0~360), when the value is `0` or `360`, the direction points to the north. This block must use after block['+Blockly.Msg.MOONBOT_COMPASS+Blockly.Msg.MOONBOT_CALIBRATE+']';
+Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR = 'This module needs to be used with the [LED Show] block!!! Write the corresponding RGB value into the LED buffer, the color RGB value range (0~255)';//'该模块需与[LED显示]模块搭配使用！！！将对应的RGB数值写入LED缓存，颜色RGB取值范围（0~255）';
+Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR_HSV = 'This module needs to be used with the [LED Show] block!!! Write the corresponding HSV value into the LED buffer, the H(Hue) value range(0~360°), the SV value range (0~255)';//'该模块需与[LED显示]模块搭配使用！！！将对应的HSV数值写入LED缓存，色调H取值范围（0~360°）,SV取值范围（0~255）';
+Blockly.Msg.MOONBOT_TIP_LED_CLEAR = 'This module needs to be used with the [LED Show] block!!! Clear the data in the LED buffer';//'该模块需与[LED显示]模块搭配使用！！！将LED缓存内数据清零';
+Blockly.Msg.MOONBOT_TIP_LED_SHOW = 'Write the data in the LED buffer to the LED and show color';//'将LED缓存内数据写入LED，并显示相关颜色';

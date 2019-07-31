@@ -77,6 +77,7 @@ Blockly.Msg.MOONBOT_ENCODER = '编码器';
 Blockly.Msg.MOONBOT_SPEAKER_SINGLE = '单曲';
 Blockly.Msg.MOONBOT_REPEAT = '循环';
 Blockly.Msg.MOONBOT_RANDOM = '随机';
+Blockly.Msg.MOONBOT_ALL = '所有';
 // music middle
 Blockly.Msg.MOONBOT_TEMPO = '节拍';
 Blockly.Msg.MOONBOT_TONE = '音调';
@@ -115,6 +116,47 @@ Blockly.Msg.MOONBOT_SHAKE = '震动';
 Blockly.Msg.MOONBOT_FREE_FALL = '自由落体';
 Blockly.Msg.MOONBOT_ON = '在';
 
+// Eyes emotion
+Blockly.Msg.MOONBOT_HAPPY = '开心';
+Blockly.Msg.MOONBOT_ANGRY = '愤怒';
+Blockly.Msg.MOONBOT_SAD = '伤心';
+Blockly.Msg.MOONBOT_CIRCLE = '转圈';
+Blockly.Msg.MOONBOT_FLASH = '闪烁';
+Blockly.Msg.MOONBOT_RAINBOW = '彩虹';
+Blockly.Msg.MOONBOT_LOOK_RIGHT = '右看';
+Blockly.Msg.MOONBOT_LOOK_LEFT = '左看';
+Blockly.Msg.MOONBOT_LOOK_UP = '上看';
+Blockly.Msg.MOONBOT_LOOK_DOWN = '下看';
+
+// MECH
+Blockly.Msg.MOONBOT_MECH = '机械臂';
+Blockly.Msg.MOONBOT_CLAW = '爪子';
+Blockly.Msg.MOONBOT_UPPER_ARM = '上臂';
+Blockly.Msg.MOONBOT_LOWER_ARM = '下臂';
+Blockly.Msg.MOONBOT_GRAB_BALL_POSITION = '球抓取位置';
+Blockly.Msg.MOONBOT_SHOOT_BALL_CONDITION = '投篮条件';
+Blockly.Msg.MOONBOT_WIDTH = '宽度';
+Blockly.Msg.MOONBOT_OPEN = '张开';
+Blockly.Msg.MOONBOT_CLOSE = '关闭';
+Blockly.Msg.MOONBOT_UP = '向上';
+Blockly.Msg.MOONBOT_DOWN = '向下';
+Blockly.Msg.MOONBOT_SEARCH = "找到";
+Blockly.Msg.MOONBOT_GRAB = "抓到";
+Blockly.Msg.MOONBOT_SHOOT = "投篮";
+Blockly.Msg.MOONBOT_BALL = "球";
+Blockly.Msg.MOONBOT_CARD = "卡片";
+
+// Bot
+Blockly.Msg.MOONBOT_BOTH = '双';
+Blockly.Msg.MOONBOT_SHAKE_ARM = '招手';
+Blockly.Msg.MOONBOT_HUMANNOID = '机器人';
+Blockly.Msg.MOONBOT_HEAD = '头部';
+Blockly.Msg.MOONBOT_ARM = '手';
+Blockly.Msg.MOONBOT_SWING = '摆动';
+Blockly.Msg.MOONBOT_SWAY_BODY = '左右晃动身体';
+Blockly.Msg.MOONBOT_TAKE_A_STEP = '向前迈步';
+Blockly.Msg.MOONBOT_NOD = '点头';
+
 /*Help文本*/
 Blockly.Msg.MOONBOT_TIP_RPM_CALIBRATE = '底盘直行偏移校正，>100%向右校正，<100%向左校正';
 Blockly.Msg.MOONBOT_TIP_DISTANCE_CALIBRATE = '底盘直行距离校正，>100%向前校正，<100%向后校正';
@@ -124,4 +166,10 @@ Blockly.Msg.MOONBOT_TIP_TANKBASE_INIT = '翻转轮子转动方向';
 Blockly.Msg.MOONBOT_TIP_SERVO_SET = '预设舵机角度及运行速度，与模块['+Blockly.Msg.MOONBOT_MOVE_ALL_SERVO+']搭配使用';
 Blockly.Msg.MOONBOT_TIP_MOVE_ALL_SERVO = '同步移动所有已预设角度的舵机至预设角度，与模块['+Blockly.Msg.MOONBOT_SERVO+Blockly.Msg.MOONBOT_PRESET+Blockly.Msg.MOONBOT_ANGLE+']搭配使用';
 Blockly.Msg.MOONBOT_TIP_SERVO_REVERSE = '翻转舵机运行方向';
-Blockly.Msg.MOONBOT_TIP_SPEAKER_PALY_NAME = '播放音乐，音乐名称只要输入前4个字即可，多输入无效';
+Blockly.Msg.MOONBOT_TIP_SPEAKER_PALY_NAME = '播放音乐，音乐名称只要输入前4个字即可(只支持英文或数字)，多输入无效';
+Blockly.Msg.MOONBOT_TIP_IMU_COMPASS_CALIBRATE = '指南针校正，校正时需将主控以`∞`字形转动数次（参考手机指南针校准）';
+Blockly.Msg.MOONBOT_TIP_IMU_READ_COMPASS = '读取指南针角度，数值范围为（0~360），当数值为`0`或`360`时，方向指向正北，使用该模块前需进行['+Blockly.Msg.MOONBOT_COMPASS+Blockly.Msg.MOONBOT_CALIBRATE+']';
+Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR = '该模块需与[LED显示]模块搭配使用！！！将对应的RGB数值写入LED缓存，颜色RGB取值范围（0~255）';
+Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR_HSV = '该模块需与[LED显示]模块搭配使用！！！将对应的HSV数值写入LED缓存，色调H取值范围（0~360°）,SV取值范围（0~255）';
+Blockly.Msg.MOONBOT_TIP_LED_CLEAR = '该模块需与[LED显示]模块搭配使用！！！将LED缓存内数据清零';
+Blockly.Msg.MOONBOT_TIP_LED_SHOW = '将LED缓存内数据写入LED，并显示相关颜色';

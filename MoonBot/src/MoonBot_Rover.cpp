@@ -7,15 +7,18 @@
 #include <MoonBot_Rover.h>
 #include <Adafruit_NeoPixel.h>
 #include <MoonBot_TankBase.h>
+#include <MoonBot_Eyes.h>
 
 extern Adafruit_NeoPixel onBoardLED;
 extern MoonBotTankBase TankBase;
+extern Adafruit_NeoPixel moonbot_eyes;
 
 MoonBotRover::MoonBotRover(MuVisionSensor& mu)
     : Mu_(mu) {
 }
 
 MoonBotRover::~MoonBotRover(void) {
+  end();
 }
 
 int MoonBotRover::begin(void) {
@@ -65,22 +68,33 @@ void MoonBotRover::runTrafficNumber(void) {
   if ((Mu_.UpdateResult(VISION_TRAFFIC_CARD_DETECT, false)&VISION_TRAFFIC_CARD_DETECT)
       && Mu_.read(VISION_TRAFFIC_CARD_DETECT, kStatus)) {
     int traffic_label = Mu_.GetValue(VISION_TRAFFIC_CARD_DETECT, kLabel);
-//    if (traffic_label == MU_TRAFFIC_CARD_PARK
-//        && (Wheel.read(kLeftMotor) == 0)
-//        && (Wheel.read(kRightMotor) == 0)) return;
     tone(tone_pin_, 500, 200);
-    onBoardLED.setPixelColor(0, 0x20, 0x40, 0);
-    onBoardLED.setPixelColor(1, 0x20, 0x40, 0);
+    onBoardLED.fill(0x204000, 0, 0);
     onBoardLED.show();
     delay(200);
     onBoardLED.clear();
     onBoardLED.show();
     switch (traffic_label) {
       case MU_TRAFFIC_CARD_TURN_AROUND:
+        for (int i = 0; i < 2; ++i) {
+          MoonBotEyesCircle(moonbot_eyes,
+                            Adafruit_NeoPixel::Color(0, 175, 100),
+                            kEyesBoth,
+                            60);
+        }
+        moonbot_eyes.clear();
+        moonbot_eyes.show();
         TankBase.writeAngle(30, 180);
+        while(TankBase.read(kLeftMotor)&&TankBase.read(kRightMotor));
         return;
       case MU_TRAFFIC_CARD_PARK:
+        moonbot_eyes.fill(Adafruit_NeoPixel::Color(220, 0, 30),
+                          0, 0);
+        moonbot_eyes.show();
         TankBase.write(0, 0);
+        delay(500);
+        moonbot_eyes.clear();
+        moonbot_eyes.show();
         return;
       default:
         TankBase.write(0, 0);
@@ -92,8 +106,7 @@ void MoonBotRover::runTrafficNumber(void) {
     while (millis()-start_time < kPausePeriod) {
       if (Mu_.GetValue(VISION_NUM_CARD_DETECT, kStatus)) {
         tone(tone_pin_, 1000, 400);
-        onBoardLED.setPixelColor(0, 0x20, 0x40, 0x10);
-        onBoardLED.setPixelColor(1, 0x20, 0x40, 0x10);
+        onBoardLED.fill(0x204010, 0, 0);
         onBoardLED.show();
         delay(400);
         onBoardLED.clear();
@@ -106,14 +119,20 @@ void MoonBotRover::runTrafficNumber(void) {
       switch (traffic_label) {
         case MU_TRAFFIC_CARD_FORWARD:
           TankBase.writeDistance(30, num*10);
+          MoonBotEyesScroll(moonbot_eyes, kEyesScrollUp,
+                            Adafruit_NeoPixel::Color(0, 175, 100), 50);
           while(TankBase.read(kLeftMotor)&&TankBase.read(kRightMotor));
           break;
         case MU_TRAFFIC_CARD_LEFT:
           TankBase.writeAngle(-30, num*90);
+          MoonBotEyesScroll(moonbot_eyes, kEyesScrollLeft,
+                            Adafruit_NeoPixel::Color(0, 175, 100), 50);
           while(TankBase.read(kLeftMotor)&&TankBase.read(kRightMotor));
           break;
         case MU_TRAFFIC_CARD_RIGHT:
           TankBase.writeAngle(30, num*90);
+          MoonBotEyesScroll(moonbot_eyes, kEyesScrollRight,
+                            Adafruit_NeoPixel::Color(0, 175, 100), 50);
           while(TankBase.read(kLeftMotor)&&TankBase.read(kRightMotor));
           break;
         default:
@@ -123,12 +142,30 @@ void MoonBotRover::runTrafficNumber(void) {
       switch (traffic_label) {
         case MU_TRAFFIC_CARD_FORWARD:
           TankBase.writeRpm(30, 30);
+          MoonBotEyesScroll(moonbot_eyes, kEyesScrollUp,
+                            Adafruit_NeoPixel::Color(0, 175, 100), 50);
           break;
         case MU_TRAFFIC_CARD_LEFT:
           TankBase.writeRpm(-30, 30);
+          for (int i = 0; i < 3; ++i) {
+            moonbot_eyes.fill(Adafruit_NeoPixel::Color(230, 140, 0), 6, 6);
+            moonbot_eyes.show();
+            delay(300);
+            moonbot_eyes.clear();
+            moonbot_eyes.show();
+            delay(300);
+          }
           break;
         case MU_TRAFFIC_CARD_RIGHT:
           TankBase.writeRpm(30, -30);
+          for (int i = 0; i < 3; ++i) {
+            moonbot_eyes.fill(Adafruit_NeoPixel::Color(230, 140, 0), 0, 6);
+            moonbot_eyes.show();
+            delay(300);
+            moonbot_eyes.clear();
+            moonbot_eyes.show();
+            delay(300);
+          }
           break;
         default:
           return;
@@ -139,7 +176,9 @@ void MoonBotRover::runTrafficNumber(void) {
 }
 
 int MoonBotRover::followBallBegin(void) {
-  return Mu_.VisionBegin(VISION_BALL_DETECT);
+  Mu_.CameraSetFPS(kFPSHigh);
+  Mu_.VisionBegin(VISION_BALL_DETECT);
+  return Mu_.VisionSetLevel(VISION_BALL_DETECT, kLevelAccuracy);
 }
 
 void MoonBotRover::followBallEnd(void) {
@@ -147,23 +186,31 @@ void MoonBotRover::followBallEnd(void) {
 }
 
 void MoonBotRover::runFollowBall(void) {
-  if (Mu_.UpdateResult(VISION_BALL_DETECT, false) | VISION_BALL_DETECT) {
+  if (Mu_.UpdateResult(VISION_BALL_DETECT, false) & VISION_BALL_DETECT) {
+//    printf("time = %lu\n", millis());
     MuVsVisionState* vision_state = Mu_.GetVisionState(VISION_BALL_DETECT);
     if (vision_state->detect) {
-      ball_x_ = vision_state->vision_result[0].bot_x_value;
-      if (ball_x_ < ball_center_x_-13) {
+      uint8_t ball_width = vision_state->vision_result[0].width;
+      ball_x_ = vision_state->vision_result[0].x_value;
+//      printf("  ball_x = %hu, ball_width = %hu\n", ball_x_, ball_width);
+      if (ball_x_ < ball_center_x_-10) {
         TankBase.write(-ball_search_rpm_, ball_search_rpm_);
-      } else if (ball_x_ > ball_center_x_ + 13) {
+      } else if (ball_x_ > ball_center_x_ + 10) {
         TankBase.write(ball_search_rpm_, -ball_search_rpm_);
-      } else {
+      } else if (ball_width < 30) {
         TankBase.write(ball_search_rpm_, ball_search_rpm_);
+      } else if (ball_width > 36) {
+        TankBase.write(-ball_search_rpm_, -ball_search_rpm_);
+      } else {
+        TankBase.write(0, 0);
       }
     } else {
-      if (ball_x_ > ball_center_x_) {
-        TankBase.write(ball_search_rpm_, -ball_search_rpm_);
-      } else {
-        TankBase.write(-ball_search_rpm_, ball_search_rpm_);
-      }
+      TankBase.write(0, 0);
+//      if (ball_x_ > ball_center_x_) {
+//        TankBase.write(ball_search_rpm_, -ball_search_rpm_);
+//      } else {
+//        TankBase.write(-ball_search_rpm_, ball_search_rpm_);
+//      }
     }
   }
 }
