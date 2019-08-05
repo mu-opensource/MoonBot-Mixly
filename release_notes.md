@@ -1,3 +1,7 @@
+MoonBot-Mixly V1.0.5
+====================
+* 1.now, TankBase forword/backword/turn_left/turn_right will run until it's stop
+
 MoonBot-Mixly V1.0.4
 ====================
 * 1.update MoonBot Arduino library to V1.0.3

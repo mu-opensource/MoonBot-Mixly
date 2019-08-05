@@ -102,6 +102,8 @@ Blockly.Arduino.TankBaseForward = function() {
     var speed_rpm = Blockly.Arduino.valueToCode(this, 'SPEED_RPM',
                     Blockly.Arduino.ORDER_NONE) || '30';
     var code = 'TankBase.forward('+value+', '+speed_rpm+');\n';
+    code += 'while(TankBase.read(kLeftMotor) && TankBase.read(kRightMotor));\n';
+    code += 'delay(100);\n';
     return code;
 };
 Blockly.Arduino.TankBaseBackward = function() {
@@ -114,6 +116,8 @@ Blockly.Arduino.TankBaseBackward = function() {
     var speed_rpm = Blockly.Arduino.valueToCode(this, 'SPEED_RPM',
                     Blockly.Arduino.ORDER_NONE) || '30';
     var code = 'TankBase.backward('+value+', '+speed_rpm+');\n';
+    code += 'while(TankBase.read(kLeftMotor) && TankBase.read(kRightMotor));\n';
+    code += 'delay(100);\n';
     return code;
 };
 Blockly.Arduino.TankBaseTurnLeft = function() {
@@ -126,6 +130,8 @@ Blockly.Arduino.TankBaseTurnLeft = function() {
     var speed_rpm = Blockly.Arduino.valueToCode(this, 'SPEED_RPM',
                     Blockly.Arduino.ORDER_NONE) || '30';
     var code = 'TankBase.turnLeft('+value+', '+speed_rpm+');\n';
+    code += 'while(TankBase.read(kLeftMotor) && TankBase.read(kRightMotor));\n';
+    code += 'delay(100);\n';
     return code;
 };
 Blockly.Arduino.TankBaseTurnRight = function() {
@@ -138,6 +144,8 @@ Blockly.Arduino.TankBaseTurnRight = function() {
     var speed_rpm = Blockly.Arduino.valueToCode(this, 'SPEED_RPM',
                     Blockly.Arduino.ORDER_NONE) || '30';
     var code = 'TankBase.turnRight('+value+', '+speed_rpm+');\n';
+    code += 'while(TankBase.read(kLeftMotor) && TankBase.read(kRightMotor));\n';
+    code += 'delay(100);\n';
     return code;
 };
 Blockly.Arduino.TankBaseStop = function() {
