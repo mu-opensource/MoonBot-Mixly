@@ -1,6 +1,6 @@
 [![Morpx-bbs](http://bbs.morpx.com/template/mu/images/logo.png)](http://bbs.morpx.com/forum.php)
-[![Git-rep](https://img.shields.io/github/repo-size/mu-opensource/MoonBot.svg)](https://github.com/mu-opensource/MoonBot-Mixly)
-[![Git-release](https://img.shields.io/github/downloads/mu-opensource/MoonBot/total.svg)](https://github.com/mu-opensource/MoonBot-Mixly/releases)
+[![Git-rep](https://img.shields.io/github/repo-size/mu-opensource/MoonBot-Mixly.svg)](https://github.com/mu-opensource/MoonBot-Mixly)
+[![Git-release](https://img.shields.io/github/downloads/mu-opensource/MoonBot-Mixly/total.svg)](https://github.com/mu-opensource/MoonBot-Mixly/releases)
 
 
 # MoonBot
