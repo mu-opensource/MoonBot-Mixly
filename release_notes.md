@@ -1,3 +1,7 @@
+MoonBot-Mixly V1.0.5a
+=====================
+* 1.add language: zh-hant
+
 MoonBot-Mixly V1.0.5
 ====================
 * 1.now, TankBase forword/backword/turn_left/turn_right will run until it's stop
