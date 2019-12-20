@@ -46,7 +46,7 @@
 		<block type="TankBaseForward">
 			<value name="STEP">
 				<shadow type="math_number">
-					<field name="NUM">0</field>
+					<field name="NUM">10</field>
 				</shadow>
 			</value>
 			<value name="SPEED_RPM">
@@ -58,7 +58,7 @@
 		<block type="TankBaseBackward">
 			<value name="STEP">
 				<shadow type="math_number">
-					<field name="NUM">0</field>
+					<field name="NUM">10</field>
 				</shadow>
 			</value>
 			<value name="SPEED_RPM">
@@ -70,7 +70,7 @@
 		<block type="TankBaseTurnLeft">
 			<value name="STEP">
 				<shadow type="math_number">
-					<field name="NUM">0</field>
+					<field name="NUM">10</field>
 				</shadow>
 			</value>
 			<value name="SPEED_RPM">
@@ -82,7 +82,7 @@
 		<block type="TankBaseTurnRight">
 			<value name="STEP">
 				<shadow type="math_number">
-					<field name="NUM">0</field>
+					<field name="NUM">10</field>
 				</shadow>
 			</value>
 			<value name="SPEED_RPM">
@@ -134,6 +134,7 @@
 				</shadow>
 			</value>
 		</block>
+		<block type="ServoSetPower"></block>
 	</category>
 	<category id="MoonBot_Music" name="音乐" colour="#165299">
 		<block type="SpeakerInit"></block>

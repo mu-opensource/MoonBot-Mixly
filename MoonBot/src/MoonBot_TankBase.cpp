@@ -35,11 +35,6 @@ int MoonBotTankBase::begin(const bool left_reverse_dir,
 }
 
 void MoonBotTankBase::write(int left_vol, int right_vol) {
-  if (motorDirectionReverseCheck(left_vol, right_vol)) {
-    left_motor_.write(0);
-    right_motor_.write(0);
-    delay(100);
-  }
   left_motor_.write(left_vol);
   right_motor_.write(right_vol);
 }
@@ -73,11 +68,6 @@ void MoonBotTankBase::writeStep(int rpm,
 }
 
 void MoonBotTankBase::writeRpm(int left_rpm, int right_rpm) {
-  if (motorDirectionReverseCheck(left_rpm, right_rpm)) {
-    left_motor_.write(0);
-    right_motor_.write(0);
-    delay(100);
-  }
   left_motor_.writeRpm(left_rpm);
   right_motor_.writeRpm(right_rpm);
 }
@@ -142,20 +132,4 @@ void MoonBotTankBase::distanceCorrection(int percent) {
     right_motor_.distanceCorrection(percent);
   }
 }
-
-bool MoonBotTankBase::motorDirectionReverseCheck(int left_speed, int right_speed) {
-  if ((read(kLeftMotor)!=0) && (left_speed!=0)
-      && (left_speed>0)!=(read(kLeftMotor)>0)) {
-    return true;
-  }
-  if ((read(kRightMotor)!=0) && (right_speed!=0)
-      && (right_speed>0)!=(read(kRightMotor)>0)) {
-    return true;
-  }
-  return false;
-}
-
-
-
-
 

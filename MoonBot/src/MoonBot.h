@@ -58,8 +58,8 @@
 //                   ┌───────┐ TypeC ┌──────┐ ||||| ┌───────┐
 //                   │       └───────┘      └───────┘       │
 //        Servo1     └─┐                                  ┌─┘   Servo4
-//     Mech: Upper Arm │                                  │  Bot:  Left Arm
-//     Bot:  Right Arm │              MoonBot             │  Mech: Claw
+//     Mech: Claw      │                                  │  Mech: Upper Arm
+//     Bot:  Right Arm │              MoonBot             │  Bot:  Left Arm
 //                   ┌─┘          Main Controller         └─┐
 //                   │              Upper Layer             │
 //                   │                                      │

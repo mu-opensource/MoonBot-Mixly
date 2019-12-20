@@ -169,6 +169,7 @@ Blockly.Blocks['TankBaseTurnLeft'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.MOONBOT_TIP_TANKBASE_TURN);
   },
 };
 Blockly.Blocks['TankBaseTurnRight'] = {
@@ -184,6 +185,7 @@ Blockly.Blocks['TankBaseTurnRight'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.MOONBOT_TIP_TANKBASE_TURN);
   },
 };
 Blockly.Blocks['TankBaseStop'] = {
@@ -302,6 +304,21 @@ Blockly.Blocks['ServoCalibrate'] = {
     this.setNextStatement(true, null);
   },
 };
+Blockly.Blocks['ServoSetPower'] = {
+  init:function() {
+    this.setColour(Blockly.Blocks.MoonBot.HUE_Servo);
+    var dropdown_state = [[Blockly.Msg.MOONBOT_ENABLE,"1"],[Blockly.Msg.MOONBOT_DISENABLE,"0"]];
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(Blockly.Blocks.MoonBot.media_path_base+"servo.png", 30, 30))
+        .appendField(Blockly.Msg.MOONBOT_SERVO)
+        .appendField(new Blockly.FieldDropdown(profile.moonbot.group_servo.concat([[Blockly.Msg.MOONBOT_ALL,"ALL"]])), "SERVO_PORT")
+        .appendField(Blockly.Msg.MOONBOT_POWER)
+        .appendField(new Blockly.FieldDropdown(dropdown_state), "STATE");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  },
+};
 /**************Music***************/
 // play
 Blockly.Blocks['SpeakerInit'] = {
@@ -338,27 +355,61 @@ Blockly.Blocks['SpeakerPlayMode'] = {
 Blockly.Blocks['SpeakerPlay'] = {
   init:function() {
     var dropdown_music = [
-      [Blockly.Msg.MOONBOT_ELEPHANT, "0101"],
-      [Blockly.Msg.MOONBOT_COCK, "0102"],
-      [Blockly.Msg.MOONBOT_DOG, "0103"],
-      [Blockly.Msg.MOONBOT_WOLF, "0104"],
-      [Blockly.Msg.MOONBOT_HORSE, "0105"],
-      [Blockly.Msg.MOONBOT_CAT, "0106"],
-      [Blockly.Msg.MOONBOT_LION, "0107"],
-      [Blockly.Msg.MOONBOT_COW, "0108"],
-      [Blockly.Msg.MOONBOT_BEAR, "0109"],
-      [Blockly.Msg.MOONBOT_DUCK, "0110"],
-      [Blockly.Msg.MOONBOT_SHEEP, "0111"],
-      [Blockly.Msg.MOONBOT_PIG, "0112"],
-      [Blockly.Msg.MOONBOT_MOSQUITO, "0113"],
-      [Blockly.Msg.MOONBOT_BIRD, "0114"],
-      [Blockly.Msg.MOONBOT_PENGUIN, "0115"],
-      ["hello", "0201"],
-      ["hi", "0202"],
-      ["how are you", "0203"],
-      ["nice to meet you", "0204"],
-      ["thank you", "0205"],
-      ["what are you doing?", "0206"],
+      [Blockly.Msg.MOONBOT_ELEPHANT,  "0101"],
+      [Blockly.Msg.MOONBOT_COCK,      "0102"],
+      [Blockly.Msg.MOONBOT_DOG,       "0103"],
+      [Blockly.Msg.MOONBOT_WOLF,      "0104"],
+      [Blockly.Msg.MOONBOT_HORSE,     "0105"],
+      [Blockly.Msg.MOONBOT_CAT,       "0106"],
+      [Blockly.Msg.MOONBOT_LION,      "0107"],
+      [Blockly.Msg.MOONBOT_COW,       "0108"],
+      [Blockly.Msg.MOONBOT_BEAR,      "0109"],
+      [Blockly.Msg.MOONBOT_DUCK,      "0110"],
+      [Blockly.Msg.MOONBOT_SHEEP,     "0111"],
+      [Blockly.Msg.MOONBOT_PIG,       "0112"],
+      [Blockly.Msg.MOONBOT_MOSQUITO,  "0113"],
+      [Blockly.Msg.MOONBOT_BIRD,      "0114"],
+      [Blockly.Msg.MOONBOT_PENGUIN,   "0115"],
+      ["hello",                       "0201"],
+      ["hi",                          "0202"],
+      ["i see you",                   "0203"],
+      ["nice to meet you",            "0204"],
+      ["thank you",                   "0205"],
+      ["what are you doing?",         "0206"],
+      ["how are you",                 "0207"],
+      ["you look great",              "0208"],
+      ["i like you",                  "0209"],
+      ["you are awsome",              "0210"],
+      ["come here",                   "0211"],
+      ["wow",                         "0212"],
+      ["hahahaha~",                   "0213"],
+      ["hey hey",                     "0214"],
+      ["hohohoho",                    "0215"],
+      ["ah oh",                       "0216"],
+      ["cry",                         "0217"],
+      ["heng",                        "0218"],
+      ["yes",                         "0219"],
+      ["no",                          "0220"],
+      ["see you later",               "0221"],
+      ["bye",                         "0222"],
+      ["mmmmm",                       "0223"],
+      ["whilstle",                    "0224"],
+      ["lalalala",                    "0225"],
+      ["snore",                       "0226"],
+      ["ouch",                        "0227"],
+      ["where are you",               "0228"],
+      ["stop",                        "0229"],
+      ["go away",                     "0230"],
+      ["id donnot like it",           "0231"],
+      ["come back",                   "0232"],
+      ["ok",                          "0233"],
+      ["oh my god",                   "0234"],
+      ["be right back",               "0235"],
+      ["i am moonbot",                "0236"],
+      ["i paly piano",                "0237"],
+      ["whats your favorite",         "0238"],
+      ["i can play another one",      "0239"],
+      ["touch my ear to select",      "0240"],
       [Blockly.Msg.MOONBOT_PIANO+" do 1", "0301"],
       [Blockly.Msg.MOONBOT_PIANO+" re 2", "0302"],
       [Blockly.Msg.MOONBOT_PIANO+" mi 3", "0303"],
@@ -367,6 +418,27 @@ Blockly.Blocks['SpeakerPlay'] = {
       [Blockly.Msg.MOONBOT_PIANO+" la 6", "0306"],
       [Blockly.Msg.MOONBOT_PIANO+" si 7", "0307"],
       [Blockly.Msg.MOONBOT_PIANO+" Do. 1.", "0308"],
+      [Blockly.Msg.MOONBOT_PIANO+" C3", "0331"],
+      [Blockly.Msg.MOONBOT_PIANO+" D3", "0332"],
+      [Blockly.Msg.MOONBOT_PIANO+" E3", "0333"],
+      [Blockly.Msg.MOONBOT_PIANO+" F3", "0334"],
+      [Blockly.Msg.MOONBOT_PIANO+" G3", "0335"],
+      [Blockly.Msg.MOONBOT_PIANO+" A3", "0336"],
+      [Blockly.Msg.MOONBOT_PIANO+" B3", "0337"],
+      [Blockly.Msg.MOONBOT_PIANO+" C4", "0341"],
+      [Blockly.Msg.MOONBOT_PIANO+" D4", "0342"],
+      [Blockly.Msg.MOONBOT_PIANO+" E4", "0343"],
+      [Blockly.Msg.MOONBOT_PIANO+" F4", "0344"],
+      [Blockly.Msg.MOONBOT_PIANO+" G4", "0345"],
+      [Blockly.Msg.MOONBOT_PIANO+" A4", "0346"],
+      [Blockly.Msg.MOONBOT_PIANO+" B4", "0347"],
+      [Blockly.Msg.MOONBOT_PIANO+" C5", "0351"],
+      [Blockly.Msg.MOONBOT_PIANO+" D5", "0352"],
+      [Blockly.Msg.MOONBOT_PIANO+" E5", "0353"],
+      [Blockly.Msg.MOONBOT_PIANO+" F5", "0354"],
+      [Blockly.Msg.MOONBOT_PIANO+" G5", "0355"],
+      [Blockly.Msg.MOONBOT_PIANO+" A5", "0356"],
+      [Blockly.Msg.MOONBOT_PIANO+" B5", "0357"],
       ["110", "0401"],
       ["120", "0402"],
       ["119", "0403"],
@@ -381,6 +453,38 @@ Blockly.Blocks['SpeakerPlay'] = {
       [Blockly.Msg.MOONBOT_DRUM+" 4", "0504"],
       [Blockly.Msg.MOONBOT_DRUM+" 5", "0505"],
       [Blockly.Msg.MOONBOT_DRUM+" 6", "0506"],
+      ["check",     "0601"],
+      ["cross",     "0602"],
+      ["circle",    "0603"],
+      ["square",    "0604"],
+      ["triangle",  "0605"],
+      ["forward",   "0701"],
+      ["turn left", "0702"],
+      ["turn right","0703"],
+      ["turn around","0704"],
+      ["park",      "0705"],
+      ["stop",      "0706"],
+      ["zero",      "0800"],
+      ["one",       "0801"],
+      ["two",       "0802"],
+      ["three",     "0803"],
+      ["four",      "0804"],
+      ["five",      "0805"],
+      ["six",       "0806"],
+      ["seven",     "0807"],
+      ["eight",     "0808"],
+      ["nine",      "0809"],
+      ["black",     "0901"],
+      ["white",     "0902"],
+      ["red",       "0903"],
+      ["yellow",    "0904"],
+      ["green",     "0905"],
+      ["cyan",      "0906"],
+      ["blue",      "0907"],
+      ["purple",    "0908"],
+      ["megenta",   "0909"],
+      ["ball",      "1001"],
+      ["tennis",    "1002"],
     ];
     this.setColour(Blockly.Blocks.MoonBot.HUE_Music);
     this.appendDummyInput()
@@ -689,7 +793,13 @@ Blockly.Blocks['IMUReadTemperature'] = {
 Blockly.Blocks['IMUOn'] = {
   init:function() {
     var dropdown_imu_state = [[Blockly.Msg.MOONBOT_SHAKE, "kIMUShake"], 
-                              [Blockly.Msg.MOONBOT_FREE_FALL, "kIMUFreeFall"]];
+                              [Blockly.Msg.MOONBOT_FREE_FALL, "kIMUFreeFall"],
+                              ["X "+Blockly.Msg.MOONBOT_UP, "X_UP"],
+                              ["X "+Blockly.Msg.MOONBOT_DOWN, "X_DOWN"],
+                              ["Y "+Blockly.Msg.MOONBOT_UP, "Y_UP"],
+                              ["Y "+Blockly.Msg.MOONBOT_DOWN, "Y_DOWN"],
+                              ["Z "+Blockly.Msg.MOONBOT_UP, "Z_UP"],
+                              ["Z "+Blockly.Msg.MOONBOT_DOWN, "Z_DOWN"]];
     this.setColour(Blockly.Blocks.MoonBot.HUE_IMU);
     this.appendDummyInput()
         .appendField("MoonBot "+Blockly.Msg.MOONBOT_ON)
@@ -779,6 +889,7 @@ Blockly.Blocks['EyesShowEmotion'] = {
   init:function() {
     var dropdown_emotion = [[Blockly.Msg.MOONBOT_HAPPY, "smile"],
                             [Blockly.Msg.MOONBOT_ANGRY, "angry"],
+                            [Blockly.Msg.MOONBOT_BLINK, "blink"],
                             [Blockly.Msg.MOONBOT_SAD, "sad"],
                             [Blockly.Msg.MOONBOT_CIRCLE, "circle"],
                             [Blockly.Msg.MOONBOT_FLASH, "flash"],

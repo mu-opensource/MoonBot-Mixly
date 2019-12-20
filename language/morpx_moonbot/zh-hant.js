@@ -5,7 +5,6 @@ goog.provide('Blockly.Msg.zh.hans');
 
 goog.require('Blockly.Msg'); 
 
-
 /* Morpx MoonBot */ 
 /*參數文本*/ 
 Blockly.Msg.MOONBOT_PORT = '接口'; 
@@ -71,6 +70,7 @@ Blockly.Msg.MOONBOT_MOVE_ALL_SERVO = '同步移動所有馬達至預設角度';
 Blockly.Msg.MOONBOT_ENABLE = '使能'; 
 Blockly.Msg.MOONBOT_DISENABLE = '失能'; 
 Blockly.Msg.MOONBOT_ENCODER = '編碼器'; 
+Blockly.Msg.MOONBOT_POWER = '供電';
 
 /* Parameter */ 
 // speaker play mode 
@@ -117,6 +117,7 @@ Blockly.Msg.MOONBOT_FREE_FALL = '自由落體';
 Blockly.Msg.MOONBOT_ON = '在'; 
 
 // Eyes emotion 
+Blockly.Msg.MOONBOT_BLINK = '眨眼';
 Blockly.Msg.MOONBOT_HAPPY = '開心'; 
 Blockly.Msg.MOONBOT_ANGRY = '憤怒'; 
 Blockly.Msg.MOONBOT_SAD = '傷心'; 
@@ -173,3 +174,4 @@ Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR = '該模組需與[LED顯示]模組搭配�
 Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR_HSV = '該模組需與[LED顯示]模組搭配使用！！！將對應的HSV數值寫入LED緩存，色調H取值範圍（0~360°）,SV取值範圍（0~255）'; 
 Blockly.Msg.MOONBOT_TIP_LED_CLEAR = '該模組需與[LED顯示]模組搭配使用！！！將LED暫存數據清除'; 
 Blockly.Msg.MOONBOT_TIP_LED_SHOW = '將LED暫存數據寫入LED，並顯示相關顏色'; 
+Blockly.Msg.MOONBOT_TIP_TANKBASE_TURN = '電機底盤以一定轉速向左/右旋轉一定角度，最小轉動角度為10°';

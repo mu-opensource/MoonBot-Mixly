@@ -1,3 +1,10 @@
+MoonBot-Mixly V1.0.6
+====================
+* 1.update MoonBot Arduino library to V1.0.5
+* 2.buf fixes, now tankebase works correctly
+* 3.add new emotions for moonbot eyes
+* 4.add new blocks: `servoSetPower`
+
 MoonBot-Mixly V1.0.5a
 =====================
 * 1.add language: zh-hant

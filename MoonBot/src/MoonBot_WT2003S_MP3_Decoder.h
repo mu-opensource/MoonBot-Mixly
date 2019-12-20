@@ -48,7 +48,7 @@ class WT2003S {
   void begin(SoftwareSerial &serialPort);
   void begin(HardwareSerial &serialPort = Serial);
 
-  uint8_t play(char* fileName);
+  uint8_t play(const char* fileName);
   uint8_t setVolume(uint8_t volumeLevel);
   uint8_t stop(void);
   void pause(void);
@@ -56,6 +56,12 @@ class WT2003S {
   uint8_t playPrevious(void);
   uint8_t playNext(void);
 
+  /*
+   * mode: 0 ==> single play
+   *       1 ==> single repeat
+   *       2 ==> play all
+   *       3 ==> random play
+   */
   uint8_t setPlayMode(uint8_t mode);
   uint16_t getSongCount(void);
   void getSongName();

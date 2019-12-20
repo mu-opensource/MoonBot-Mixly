@@ -1,5 +1,4 @@
 // This file was automatically generated.  Do not modify.
-
 'use strict';
 
 goog.provide('Blockly.Msg.en');
@@ -27,10 +26,10 @@ Blockly.Msg.MOONBOT_TEMPERATRUE = 'temperation';                //'温度';
 Blockly.Msg.MOONBOT_AXES = 'axes';                              //'轴';
 Blockly.Msg.MOONBOT_ROLL = 'roll';                              //'横滚角';
 Blockly.Msg.MOONBOT_PITCH = 'pitch';                            //'俯仰角';
-Blockly.Msg.MOONBOT_READ = 'read ';                              //'读取';
-Blockly.Msg.MOONBOT_WRITE = 'write ';                            //'写入';
-Blockly.Msg.MOONBOT_SET = 'set ';                                //'设置';
-Blockly.Msg.MOONBOT_PRESET = 'preset ';                          //'预设';
+Blockly.Msg.MOONBOT_READ = 'read ';                             //'读取';
+Blockly.Msg.MOONBOT_WRITE = 'write ';                           //'写入';
+Blockly.Msg.MOONBOT_SET = 'set ';                               //'设置';
+Blockly.Msg.MOONBOT_PRESET = 'preset ';                         //'预设';
 Blockly.Msg.MOONBOT_MODE = 'mode';                              //'模式';
 Blockly.Msg.MOONBOT_LEFT = 'left';                              //'左';
 Blockly.Msg.MOONBOT_RIGHT = 'right';                            //'右';
@@ -51,7 +50,7 @@ Blockly.Msg.MOONBOT_STEP = 'step';                              //'步';
 Blockly.Msg.MOONBOT_SPEED = 'speed';                            //'速度';
 Blockly.Msg.MOONBOT_VALUE = 'value';                            //'值';
 Blockly.Msg.MOONBOT_STRENGTH = 'strength';                      //'强度';
-Blockly.Msg.MOONBOT_CALIBRATE = ' calibrate';                    //'校正';
+Blockly.Msg.MOONBOT_CALIBRATE = ' calibrate';                   //'校正';
 Blockly.Msg.MOONBOT_SHOW = 'show';                              //'显示';
 Blockly.Msg.MOONBOT_CLEAR = 'clear';                            //'清除';
 Blockly.Msg.MOONBOT_PLAY = 'play';                              //'播放';
@@ -60,8 +59,8 @@ Blockly.Msg.MOONBOT_PLAY_NEXT = 'paly next';                    //'下一首';
 Blockly.Msg.MOONBOT_PLAY_LAST = 'play last';                    //'上一首';
 Blockly.Msg.MOONBOT_VOLUME = 'volume';                          //'音量';
 Blockly.Msg.MOONBOT_PRESSED = 'pressed';                        //'被按下';
-Blockly.Msg.MOONBOT_STRAIGHT_STEP = 'straight ';                 //'直行';
-Blockly.Msg.MOONBOT_ANGLE_STEP = 'turning ';                       //'转弯';
+Blockly.Msg.MOONBOT_STRAIGHT_STEP = 'straight ';                //'直行';
+Blockly.Msg.MOONBOT_ANGLE_STEP = 'turning ';                    //'转弯';
 Blockly.Msg.MOONBOT_REVERSE_DIRECTION = 'reverse direction';    //'翻转方向';
 
 Blockly.Msg.MOONBOT_INIT_ON = 'init on';                        //'连接至';
@@ -71,6 +70,7 @@ Blockly.Msg.MOONBOT_MOVE_ALL_SERVO = 'move all servo to preset angle';//'同步�
 Blockly.Msg.MOONBOT_ENABLE = 'enable';                          //'使能';
 Blockly.Msg.MOONBOT_DISENABLE = 'disable';                      //'失能';
 Blockly.Msg.MOONBOT_ENCODER = 'encoder';                        //'编码器';
+Blockly.Msg.MOONBOT_POWER = 'power';                            //'供电';
 
 /*   Parameter  */
 // speaker play mode
@@ -117,6 +117,7 @@ Blockly.Msg.MOONBOT_FREE_FALL = 'free fall';                    //'自由落体'
 Blockly.Msg.MOONBOT_ON = 'on';                                  //'在';
 
 // Eyes emotion
+Blockly.Msg.MOONBOT_BLINK = 'blink';                            //'眨眼';
 Blockly.Msg.MOONBOT_HAPPY = 'happy';
 Blockly.Msg.MOONBOT_ANGRY = 'angry';
 Blockly.Msg.MOONBOT_SAD = 'sad';
@@ -173,3 +174,4 @@ Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR = 'This module needs to be used with the [
 Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR_HSV = 'This module needs to be used with the [LED Show] block!!! Write the corresponding HSV value into the LED buffer, the H(Hue) value range(0~360°), the SV value range (0~255)';//'该模块需与[LED显示]模块搭配使用！！！将对应的HSV数值写入LED缓存，色调H取值范围（0~360°）,SV取值范围（0~255）';
 Blockly.Msg.MOONBOT_TIP_LED_CLEAR = 'This module needs to be used with the [LED Show] block!!! Clear the data in the LED buffer';//'该模块需与[LED显示]模块搭配使用！！！将LED缓存内数据清零';
 Blockly.Msg.MOONBOT_TIP_LED_SHOW = 'Write the data in the LED buffer to the LED and show color';//'将LED缓存内数据写入LED，并显示相关颜色';
+Blockly.Msg.MOONBOT_TIP_TANKBASE_TURN = 'The TankBase rotates to a left/right angle at a certain speed, and the minimum rotation angle is 10°.';//'电机底盘以一定转速向左/右旋转一定角度，最小转动角度为10°';

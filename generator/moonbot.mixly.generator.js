@@ -207,6 +207,18 @@ Blockly.Arduino.ServoCalibrate = function() {
     var code = 'm_servo['+servo_port+'].correction('+value+');\n';
     return code;
 };
+Blockly.Arduino.ServoSetPower = function() {
+    Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
+    var servo_port = this.getFieldValue('SERVO_PORT');
+    var state = this.getFieldValue('STATE');
+    var code = '';
+    if (servo_port == 'ALL') {
+        code += 'for (size_t i = 0; i < kServoNum; ++i) { m_servo[i].power('+state+'); }\n';
+    } else {
+        code += 'm_servo['+servo_port+'].power('+state+');\n';
+    }
+    return code;
+};
 /**************Music***************/
 Blockly.Arduino.SpeakerInit = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
@@ -232,7 +244,7 @@ Blockly.Arduino.SpeakerPlayName = function() {
     var name2 = this.getFieldValue('NAME2');
     var name3 = this.getFieldValue('NAME3');
     var name4 = this.getFieldValue('NAME4');
-    var code = speaker+'.play((char*)"'+name1+name2+name3+name4+'");\n';
+    var code = speaker+'.play("'+name1+name2+name3+name4+'");\n';
     return code;
 };
 Blockly.Arduino.SpeakerSet = function() {
@@ -254,11 +266,11 @@ Blockly.Arduino.BuzzerPlayToneForBeat = function() {
     Blockly.Arduino.setups_[key_beat] = 'pinMode(MOONBOT_PIN_BUZZER_SIG, OUTPUT);\n  pinMode(MOONBOT_PIN_BUZZER_SHDW, OUTPUT);\n  digitalWrite(MOONBOT_PIN_BUZZER_SHDW, LOW);';
     var tone = this.getFieldValue('TONE');
     var beat = this.getFieldValue('BEAT');
-    var code = '\
-tone(MOONBOT_PIN_BUZZER_SIG, '+tone+');\n\
-delay(m_beat*'+beat+'/BEAT_FRACTION_WHOLE);\n\
-noTone(MOONBOT_PIN_BUZZER_SIG);\n\
-';
+    var code = '{//tone play\n\
+    tone(MOONBOT_PIN_BUZZER_SIG, '+tone+');\n\
+    delay(m_beat*'+beat+'/BEAT_FRACTION_WHOLE);\n\
+    noTone(MOONBOT_PIN_BUZZER_SIG);\n\
+}\n';
     return code;
 };
 Blockly.Arduino.BuzzerPauseBeat = function() {
@@ -386,8 +398,29 @@ Blockly.Arduino.IMUReadTemperature = function() {
 Blockly.Arduino.IMUOn = function() {
     Blockly.Arduino.definitions_[key_include_moonbot] = '#include <MoonBot.h>';
     Blockly.Arduino.setups_[key_imu_begin] = 'IMU.enable();';
+    Blockly.Arduino.definitions_[key_acceleration] = 'int32_t m_accelerometer[3] = { 0 };';
     var state = this.getFieldValue('STATE');
     var code = 'IMU.on('+state+')';
+    switch (state) {
+        case "X_UP":
+            code = '((IMU.Acc.GetAxes(m_accelerometer)==LSM303AGR_ACC_STATUS_OK && m_accelerometer[0]>700) ? true:false)';
+            break;
+        case "X_DOWN":
+            code = '((IMU.Acc.GetAxes(m_accelerometer)==LSM303AGR_ACC_STATUS_OK && m_accelerometer[0]<-700) ? true:false)';
+            break;
+        case "Y_UP":
+            code = '((IMU.Acc.GetAxes(m_accelerometer)==LSM303AGR_ACC_STATUS_OK && m_accelerometer[1]>700) ? true:false)';
+            break;
+        case "Y_DOWN":
+            code = '((IMU.Acc.GetAxes(m_accelerometer)==LSM303AGR_ACC_STATUS_OK && m_accelerometer[1]<-700) ? true:false)';
+            break;
+        case "Z_UP":
+            code = '((IMU.Acc.GetAxes(m_accelerometer)==LSM303AGR_ACC_STATUS_OK && m_accelerometer[2]>700) ? true:false)';
+            break;
+        case "Z_DOWN":
+            code = '((IMU.Acc.GetAxes(m_accelerometer)==LSM303AGR_ACC_STATUS_OK && m_accelerometer[2]<-700) ? true:false)';
+            break;
+    }
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 /**************LED***************/
@@ -424,111 +457,143 @@ Blockly.Arduino.EyesShowEmotion = function() {
     Blockly.Arduino.setups_['moonbot_eyes'+'begin'] = 'moonbot_eyes.begin();'
     var emotion = this.getFieldValue('EMOTION');
     var code = '';
+    code += 'for (size_t i = 0; i < kServoNum; ++i) { m_servo[i].power(0); }\n';
     switch (emotion) {
         case 'smile':
-            code += '\
-moonbot_eyes.setPixelColor(0, 0x003030);\n\
-moonbot_eyes.setPixelColor(1, 0x003030);\n\
-moonbot_eyes.setPixelColor(2, 0x000000);\n\
-moonbot_eyes.setPixelColor(3, 0x000000);\n\
-moonbot_eyes.setPixelColor(4, 0x000000);\n\
-moonbot_eyes.setPixelColor(5, 0x003030);\n\
-moonbot_eyes.setPixelColor(6, 0x003030);\n\
-moonbot_eyes.setPixelColor(7, 0x003030);\n\
-moonbot_eyes.setPixelColor(8, 0x000000);\n\
-moonbot_eyes.setPixelColor(9, 0x000000);\n\
-moonbot_eyes.setPixelColor(10, 0x000000);\n\
-moonbot_eyes.setPixelColor(11, 0x003030);\n\
-moonbot_eyes.show();\n';
+            code += '{//eyes smile\n\
+    moonbot_eyes.clear();\n\
+    moonbot_eyes.setPixelColor(0, 0x00FFFF);\n\
+    moonbot_eyes.setPixelColor(1, 0x00FFFF);\n\
+    moonbot_eyes.setPixelColor(5, 0x00FFFF);\n\
+    moonbot_eyes.setPixelColor(6, 0x00FFFF);\n\
+    moonbot_eyes.setPixelColor(7, 0x00FFFF);\n\
+    moonbot_eyes.setPixelColor(11, 0x00FFFF);\n\
+    moonbot_eyes.show();\n\
+}\n';
             break;
         case 'angry':
-            code += '\
-for (int j = 1; j <= 1; j = j + (1)) {\n\
-    for (int i = 0; i <= 200; i = i + (4)) {\n\
-        moonbot_eyes.setBrightness(i);\n\
-        moonbot_eyes.fill(0xff0000, 0, 0);\n\
+            code += '{//eyes angry\n\
+    for (long int i = 0; i <= 200; i = i + (4)) {\n\
+        moonbot_eyes.fill(i<<16, 0, 0);\n\
         moonbot_eyes.show();\n\
         delay(2);\n\
     }\n\
-    for (int i = 200; i >= 0; i = i + (-4)) {\n\
-        moonbot_eyes.setBrightness(i);\n\
-        moonbot_eyes.fill(0xff0000, 0, 0);\n\
+    for (long int i = 200; i >= 0; i = i-4) {\n\
+        moonbot_eyes.fill(i<<16, 0, 0);\n\
         moonbot_eyes.show();\n\
         delay(1);\n\
     }\n\
-}\n\
-for (int i = 0; i <= 200; i = i + (4)) {\n\
-    moonbot_eyes.setBrightness(i);\n\
-    moonbot_eyes.fill(0xff0000, 0, 0);\n\
+    for (long int i = 0; i <= 200; i = i + (4)) {\n\
+        moonbot_eyes.fill(i<<16, 0, 0);\n\
+        moonbot_eyes.show();\n\
+        delay(2);\n\
+    }\n\
+}\n';
+            break;
+        case 'blink':
+            code += '{//eyes blink\n\
+    unsigned int action_delay = 30;\n\
+    moonbot_eyes.setPixelColor(0, 0);\n\
+    moonbot_eyes.setPixelColor(6, 0);\n\
     moonbot_eyes.show();\n\
-    delay(2);\n\
-}\n\
-moonbot_eyes.setBrightness(255);\n\
-            ';
+    delay(action_delay);\n\
+    moonbot_eyes.setPixelColor(1, 0);\n\
+    moonbot_eyes.setPixelColor(5, 0);\n\
+    moonbot_eyes.setPixelColor(7, 0);\n\
+    moonbot_eyes.setPixelColor(11, 0);\n\
+    moonbot_eyes.show();\n\
+    delay(action_delay);\n\
+    moonbot_eyes.setPixelColor(2, 0);\n\
+    moonbot_eyes.setPixelColor(4, 0);\n\
+    moonbot_eyes.setPixelColor(8, 0);\n\
+    moonbot_eyes.setPixelColor(10, 0);\n\
+    moonbot_eyes.show();\n\
+    delay(action_delay);\n\
+    moonbot_eyes.setPixelColor(3, 0);\n\
+    moonbot_eyes.setPixelColor(9, 0);\n\
+    moonbot_eyes.show();\n\
+    delay(action_delay);\n\
+    moonbot_eyes.setPixelColor(3, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.setPixelColor(9, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.show();\n\
+    delay(action_delay);\n\
+    moonbot_eyes.setPixelColor(2, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.setPixelColor(4, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.setPixelColor(8, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.setPixelColor(10, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.show();\n\
+    delay(action_delay);\n\
+    moonbot_eyes.setPixelColor(1, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.setPixelColor(5, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.setPixelColor(7, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.setPixelColor(11, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.show();\n\
+    delay(action_delay);\n\
+    moonbot_eyes.setPixelColor(0, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.setPixelColor(6, 0, 0xFF, 0xFF);\n\
+    moonbot_eyes.show();\n\
+}\n';
             break
         case 'sad':
-            code += '\n\
-moonbot_eyes.clear();\n\
-for (int j = 1; j <= 1; j = j + (1)) {\n\
+            code += '{//eyes sad\n\
+    moonbot_eyes.clear();\n\
+    for (int j = 1; j <= 1; j = j + (1)) {\n\
+        for (int i = 50; i <= 150; i = i + (1)) {\n\
+            moonbot_eyes.setPixelColor(2, Adafruit_NeoPixel::Color(0, i, i));\n\
+            moonbot_eyes.setPixelColor(10, Adafruit_NeoPixel::Color(0, i, i));\n\
+            moonbot_eyes.show();\n\
+            delay(4);\n\
+        }\n\
+        for (int i = 150; i >= 50; i = i + (-1)) {\n\
+            moonbot_eyes.setPixelColor(2, Adafruit_NeoPixel::Color(0, i, i));\n\
+            moonbot_eyes.setPixelColor(10, Adafruit_NeoPixel::Color(0, i, i));\n\
+            moonbot_eyes.show();\n\
+            delay(4);\n\
+        }\n\
+    }\n\
     for (int i = 50; i <= 150; i = i + (1)) {\n\
-        moonbot_eyes.setBrightness(i);\n\
-        moonbot_eyes.setPixelColor(2, 0x00ffff);\n\
-        moonbot_eyes.setPixelColor(10, 0x00ffff);\n\
+        moonbot_eyes.setPixelColor(2, Adafruit_NeoPixel::Color(0, i, i));\n\
+        moonbot_eyes.setPixelColor(10, Adafruit_NeoPixel::Color(0, i, i));\n\
         moonbot_eyes.show();\n\
         delay(4);\n\
     }\n\
-    for (int i = 150; i >= 50; i = i + (-1)) {\n\
-        moonbot_eyes.setBrightness(i);\n\
-        moonbot_eyes.setPixelColor(2, 0x00ffff);\n\
-        moonbot_eyes.setPixelColor(10, 0x00ffff);\n\
-        moonbot_eyes.show();\n\
-        delay(4);\n\
-    }\n\
-}\n\
-for (int i = 50; i <= 150; i = i + (1)) {\n\
-    moonbot_eyes.setBrightness(i);\n\
-    moonbot_eyes.setPixelColor(2, 0x00ffff);\n\
-    moonbot_eyes.setPixelColor(10, 0x00ffff);\n\
-    moonbot_eyes.show();\n\
-    delay(4);\n\
-}\n\
-moonbot_eyes.setBrightness(255);\n\
-colorFade(moonbot_eyes, 0, 0, 0,3);\n\
-            ';
+    colorFade(moonbot_eyes, 0, 0, 0,3);\n\
+}\n';
             break;
         case 'look_right':
-            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookRight, 0x003030);\n';
+            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookRight, 0x00FFFF);\n';
             break;
         case 'look_left':
-            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookLeft, 0x003030);\n';
+            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookLeft, 0x00FFFF);\n';
             break;
         case 'look_up':
-            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookUp, 0x003030);\n';
+            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookUp, 0x00FFFF);\n';
             break;
         case 'look_down':
-            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookDown, 0x003030);\n';
+            code += 'MoonBotEyesLook(moonbot_eyes, kEyesLookDown, 0x00FFFF);\n';
             break;
         case 'circle':
-            code += '\n\
-colorWipe(moonbot_eyes, (0), 40);\n\
-colorWipe(moonbot_eyes, 0x3030, 40);\n\
-            ';
+            code += '{//eyes circle\n\
+    colorWipe(moonbot_eyes, (0), 40);\n\
+    colorWipe(moonbot_eyes, 0xFFFF, 40);\n\
+}\n';
             break;
         case 'flash':
-            code += '\n\
-theaterChase(moonbot_eyes, 0x3030, 40);\n\
-colorFade(moonbot_eyes, 0, 0, 0,3);\n\
-            ';
+            code += '{//eyes flash\n\
+    theaterChase(moonbot_eyes, 0xFFFF, 40);\n\
+    colorFade(moonbot_eyes, 0, 0, 0,3);\n\
+}\n';
             break;
         case 'rainbow':
-            code += '\
-rainbowCycle(moonbot_eyes, 1);\n\
-colorFade(moonbot_eyes, 0, 0, 0,3);\n\
-            ';
+            code += '{//eyes rainbow\n\
+    rainbowCycle(moonbot_eyes, 1);\n\
+    colorFade(moonbot_eyes, 0, 0, 0,3);\n\
+}\n';
             break;
         default:
             break;
     }
+    code += 'for (size_t i = 0; i < kServoNum; ++i) { m_servo[i].power(1); }\n';
     return code;
 };
 Blockly.Arduino.LedSetColor = function() {

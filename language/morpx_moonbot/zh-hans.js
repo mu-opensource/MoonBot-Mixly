@@ -5,7 +5,6 @@ goog.provide('Blockly.Msg.zh.hans');
 
 goog.require('Blockly.Msg');
 
-
 /*          Morpx MoonBot          */
 /*参数文本*/
 Blockly.Msg.MOONBOT_PORT = '端口';
@@ -68,9 +67,10 @@ Blockly.Msg.MOONBOT_INIT_ON = '连接至';
 
 Blockly.Msg.MOONBOT_LED_NUMBER = '灯号';
 Blockly.Msg.MOONBOT_MOVE_ALL_SERVO = '同步移动所有舵机至预设角度';
-Blockly.Msg.MOONBOT_ENABLE = '使能';
-Blockly.Msg.MOONBOT_DISENABLE = '失能';
+Blockly.Msg.MOONBOT_ENABLE = '开启';
+Blockly.Msg.MOONBOT_DISENABLE = '关闭';
 Blockly.Msg.MOONBOT_ENCODER = '编码器';
+Blockly.Msg.MOONBOT_POWER = '供电';
 
 /*   Parameter  */
 // speaker play mode
@@ -117,6 +117,7 @@ Blockly.Msg.MOONBOT_FREE_FALL = '自由落体';
 Blockly.Msg.MOONBOT_ON = '在';
 
 // Eyes emotion
+Blockly.Msg.MOONBOT_BLINK = "眨眼";
 Blockly.Msg.MOONBOT_HAPPY = '开心';
 Blockly.Msg.MOONBOT_ANGRY = '愤怒';
 Blockly.Msg.MOONBOT_SAD = '伤心';
@@ -173,3 +174,4 @@ Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR = '该模块需与[LED显示]模块搭配�
 Blockly.Msg.MOONBOT_TIP_LED_SET_COLOR_HSV = '该模块需与[LED显示]模块搭配使用！！！将对应的HSV数值写入LED缓存，色调H取值范围（0~360°）,SV取值范围（0~255）';
 Blockly.Msg.MOONBOT_TIP_LED_CLEAR = '该模块需与[LED显示]模块搭配使用！！！将LED缓存内数据清零';
 Blockly.Msg.MOONBOT_TIP_LED_SHOW = '将LED缓存内数据写入LED，并显示相关颜色';
+Blockly.Msg.MOONBOT_TIP_TANKBASE_TURN = '电机底盘以一定转速向左/右旋转一定角度，最小转动角度为10°';
